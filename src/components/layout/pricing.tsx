@@ -32,8 +32,6 @@ const plans = [
       "Advanced analytics & reporting",
       "Priority 24/7 support",
       "Custom branding",
-      "API access",
-      "Team collaboration tools",
     ],
     isPopular: true,
   },
@@ -64,7 +62,7 @@ export function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground max-w-2xl mx-auto"
+            className="text-xl text-muted-background max-w-2xl mx-auto"
           >
             No hidden fees. No contracts. Cancel anytime.
           </motion.p>
@@ -84,23 +82,23 @@ export function Pricing() {
               {plan.isPopular && (
                 <div className="absolute -top-4 left-0 right-0 flex justify-center">
                   <span className="bg-primary text-primary-foreground text-sm font-medium px-3 py-1 rounded-full">
-                    Most Popular
+                    with no website
                   </span>
                 </div>
               )}
 
-              <div className={`h-full rounded-2xl border bg-background p-8 ${plan.isPopular ? 'shadow-lg ring-2 ring-primary' : ''}`}>
+              <div className={`h-full rounded-2xl border bg-black text-background p-8 ${plan.isPopular ? 'shadow-lg ring-2 ring-primary' : ''}`}>
                 <div className="space-y-6">
                   {/* Plan Header */}
                   <div>
                     <h3 className="text-2xl font-semibold">{plan.name}</h3>
-                    <p className="text-muted-foreground mt-2">{plan.description}</p>
+                    <p className="text-muted-background mt-2">{plan.description}</p>
                   </div>
 
                   {/* Price */}
                   <div className="flex items-baseline">
                     <span className="text-5xl font-bold">{plan.price}</span>
-                    <span className="ml-2 text-muted-foreground">{plan.period}</span>
+                    <span className="ml-2 text-muted-background">{plan.period}</span>
                   </div>
 
                   {/* Features */}
@@ -108,7 +106,7 @@ export function Pricing() {
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-center gap-3">
                         <Check className="size-5 text-primary flex-shrink-0" />
-                        <span className="text-muted-foreground">{feature}</span>
+                        <span className="text-muted-background">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -128,7 +126,7 @@ export function Pricing() {
 
         {/* Additional Info */}
         <div className="mt-16 text-center">
-          <p className="text-muted-foreground">
+          <p className="text-muted-background">
             Need a custom plan? <a href="/contact" className="text-primary hover:underline">Contact us</a>
           </p>
         </div>

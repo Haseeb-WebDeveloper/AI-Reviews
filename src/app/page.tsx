@@ -2,6 +2,7 @@ import { Hero } from "@/components/layout/hero";
 import { HowItWorks } from "@/components/layout/how-it-works";
 import OurClients from "@/components/layout/our-clients";
 import { Pricing } from "@/components/layout/pricing";
+import { Testmonial } from "@/components/layout/testmonial";
 import { WhyItWorks } from "@/components/layout/why-it-works";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <WhyItWorks />
       <HowItWorks />
       <Pricing />
+      <Testmonial />
     </>
   );
 }
