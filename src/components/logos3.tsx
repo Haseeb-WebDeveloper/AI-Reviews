@@ -22,7 +22,7 @@ interface Logos3Props {
 }
 
 const Logos3 = ({
-  heading = "400+ Businesses Trust Us",
+  heading = "400+ Local Businesses Trust Us",
   logos = [
     {
       id: "logo-1",
@@ -77,7 +77,7 @@ const Logos3 = ({
   return (
     <section className="py-20">
       <div className="max-w-[1050px] mx-auto px-6 md:px-0 flex flex-col items-center text-center">
-        <h1 className="my-6 text-pretty text-2xl font-bold lg:text-4xl">
+        <h1 className="my-6 text-pretty text-sm md:text-lg">
           {heading}
         </h1>
       </div>
@@ -106,8 +106,8 @@ const Logos3 = ({
               ))}
             </CarouselContent>
           </Carousel>
-          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent"></div>
+          <div className="absolute inset-y-0 left-0 w-[50%] bg-gradient-to-r from-background to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-[50%] bg-gradient-to-l from-background to-transparent"></div>
         </div>
       </div>
     </section>

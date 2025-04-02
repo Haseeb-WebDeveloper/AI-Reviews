@@ -1,4 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rate Our Job
+
+A modern web application built with Next.js for collecting and managing job reviews. The application features a sleek UI with animations, responsive design, and dark mode support.
+
+## 🚀 Features
+
+- Modern, responsive UI with smooth animations
+- Dark mode support
+- Auto-scrolling carousel for client logos
+- Interactive video dialog with custom animations
+- Smooth scrolling implementation
+- Custom theme system with OKLCH color space
+- Custom font integration (Bricolage Grotesque)
+- Component-based architecture using React and TypeScript
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15.2
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **UI Components:** 
+  - shadcn/ui (custom components)
+  - Radix UI primitives
+  - Embla Carousel
+- **Animation Libraries:**
+  - Framer Motion
+  - Motion
+- **Other Libraries:**
+  - next-themes (dark mode)
+  - class-variance-authority (component variants)
+  - lucide-react (icons)
+  - @studio-freight/react-lenis (smooth scrolling)
+
+## 📦 Project Structure
 
 ## Getting Started
 
