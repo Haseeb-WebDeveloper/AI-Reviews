@@ -9,14 +9,19 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [isAtTop, setIsAtTop] = useState(true);
   
   useEffect(() => {
     // Set initial scroll position
     setPrevScrollPos(window.scrollY);
+    setIsAtTop(window.scrollY < 10);
     
     const handleScroll = () => {
       // Get current scroll position
       const currentScrollPos = window.scrollY;
+      
+      // Update isAtTop state
+      setIsAtTop(currentScrollPos < 10);
       
       // Calculate the scroll direction and distance
       const scrollingUp = prevScrollPos > currentScrollPos;
@@ -63,7 +68,9 @@ export function Navbar() {
   };
 
   // Navbar container styles with transition
-  const navbarContainerStyles = `fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+  const navbarContainerStyles = `fixed ${
+    isAtTop ? 'top-8' : '-top-2'
+  } left-0 right-0 z-40 transition-all duration-300 ease-in-out ${
     visible ? 'translate-y-0' : '-translate-y-full'
   }`;
 
@@ -76,7 +83,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.webp" alt="Rateourjob" width={100} height={100} className="w-10 h-10" />
               <span className="flex items-center gap-2">
-                <span className="text-lg md:text-xl font-bold">Rateourjob</span>
+                <span className="text-lg md:text-xl font-bold uppercase">Rateourjob</span>
               </span>
             </Link>
           </div>
@@ -133,7 +140,7 @@ export function Navbar() {
           {/* Mobile Menu (Dropdown) */}
           {mobileMenuOpen && (
             <div className="md:hidden fixed top-full bg-white z-50 w-full left-0 right-0 p-4">
-              <div className="flex flex-col space-y-6 w-full h-full ">
+              <div className="flex flex-col space-y-2 w-full h-full ">
                 <Link href="#how-it-works" 
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-3 text-lg font-medium text-center hover:bg-foreground/5 rounded-lg">

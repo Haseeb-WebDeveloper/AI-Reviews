@@ -34,13 +34,13 @@ export function Hero() {
     ];
 
     return (
-        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-32 pb-16 md:pt-36">
+        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-4 lg:px-8 pt-44 pb-16">
             {/* Main Content Container */}
             <div className="max-w-4xl mx-auto text-center space-y-8">
                 {/* Heading */}
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
                     Grow Your Business With{" "}
-                    <span className="text-primary">Automatic Review Requests          </span>
+                    <span className="text-primary">Automatic Review Requests</span>
                 </h1>
 
 
@@ -56,11 +56,11 @@ export function Hero() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" className="text-lg px-8 py-6">
-                    <Link href="/get-started">
+                    <Button size="lg" className="text-lg px-8 py-6">
+                        <Link href="/get-started">
                             Start Totally Free
                         </Link>
-                        </Button>
+                    </Button>
                     {/* <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                         Watch Demo
                     </Button> */}
@@ -73,7 +73,7 @@ export function Hero() {
                     <HeroVideoDialog
                         className="block dark:hidden"
                         animationStyle="top-in-bottom-out"
-                        videoSrc="/test-video.mp4"
+                        videoSrc="/hero-video.mp4"
                         thumbnailSrc="/test-video-thumbnail.jpg"
                         thumbnailAlt="Hero Video"
                     />

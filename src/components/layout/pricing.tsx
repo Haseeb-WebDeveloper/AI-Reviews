@@ -97,11 +97,11 @@ export function Pricing() {
           <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="max-w-[1050px] mx-auto px-6 md:px-0">
+        <div className="max-w-[1050px] mx-auto px-4 md:px-0">
           {/* Section Header */}
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-4xl font-bold">
-              Choose the plan that's right for you
+            The best time to get more reviews was yesterday. The second-best time? Right now.
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               No hidden fees. No contracts. Cancel anytime.
@@ -141,12 +141,15 @@ export function Pricing() {
                         <li key={feature.title} className="flex items-start gap-3">
                           <Check className="size-5 text-primary flex-shrink-0 mt-1" />
                           <span className="text-muted-background flex-1">{feature.title}</span>
-                          <Tooltip>
-                            <TooltipTrigger>
+                          <Tooltip delayDuration={0}>
+                            <TooltipTrigger className="cursor-pointer">
                               <HelpCircle className="size-5 text-muted-background/50 hover:text-primary transition-colors" />
                             </TooltipTrigger>
-                            <TooltipContent>
+                            <TooltipContent side="left" sideOffset={10} className="hidden md:block">
                               <p className="max-w-xs text-base p-2">{feature.description}</p>
+                            </TooltipContent>
+                            <TooltipContent side="top" className="md:hidden">
+                              <p className="max-w-[280px] text-sm p-2">{feature.description}</p>
                             </TooltipContent>
                           </Tooltip>
                         </li>

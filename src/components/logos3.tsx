@@ -99,7 +99,7 @@ const Logos3 = ({
                   key={logo.id}
                   className="flex basis-1/3 justify-center pl-0 sm:basis-1/4 md:basis-1/5 lg:basis-1/6"
                 >
-                  <div className="mx-10 flex shrink-0 items-center justify-center">
+                  <div className="md:mx-10 mx-2 flex shrink-0 items-center justify-center">
                     <div>
                       <img
                         src={logo.image}
@@ -112,8 +112,8 @@ const Logos3 = ({
               ))}
             </CarouselContent>
           </Carousel>
-          <div className="absolute inset-y-0 left-0 w-[20%] bg-gradient-to-r from-white to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-white to-transparent"></div>
+          <div className="absolute inset-y-0 left-0 md:w-[20%] w-[10%] bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 md:w-[20%] w-[10%] bg-gradient-to-l from-white to-transparent"></div>
         </div>
       </div>
      </>

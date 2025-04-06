@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Instagram, Facebook, Linkedin, MessageCircle, Mail, Phone } from "lucide-react";
+import { Star } from "lucide-react";
 import { useState } from "react";
 
 export function ContactForm() {
@@ -50,53 +50,66 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact"  className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden bg-foreground text-background">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-[1050px] mx-auto px-6 md:px-0">
+      <div className="max-w-[1050px] mx-auto px-4 md:px-0">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Contact Info */}
+          {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h1 className="text-4xl font-bold">Contact Us</h1>
-
             <div className="space-y-6">
-              <div className="flex items-center gap-3">
-                <MessageCircle className="size-6 text-primary" />
-                <p className="text-lg">Live Chat with our AI Specialist</p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Mail className="size-6 text-primary" />
-                <p className="text-lg">Email: info@rateourjob.com</p>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <Phone className="size-6 text-primary" />
-                <p className="text-lg">WhatsApp: +923144174625</p>
-              </div>
+              <h1 className="text-4xl font-bold">
+                More Reviews = More Traffic = More Customers
+              </h1>
+              <p className="text-xl text-muted-background">
+                It's simple math:
+              </p>
             </div>
 
-            <div className="space-y-4">
-              <p className="text-lg font-medium">Follow us on social media:</p>
-              <div className="flex gap-4">
-                <a href="https://www.instagram.com/rateourjob/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  <Instagram className="size-8" />
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61574592760873" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  <Facebook className="size-8" />
-                </a>
-                <a href="https://www.linkedin.com/company/rateourjob/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-                  <Linkedin className="size-8" />
-                </a>
-              </div>
+            <div className="space-y-6">
+              {[
+                {
+                  title: "More Reviews",
+                  description: "Google ranks you higher → More people see your business",
+                },
+                {
+                  title: "More Visibility",
+                  description: "More clicks → More walk-ins, calls, and online bookings",
+                },
+                {
+                  title: "More Social Proof",
+                  description: "Less hesitation → More customers choosing YOU over competitors",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-start gap-3"
+                >
+                  <Star className="size-6 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold text-xl">{item.title}</h3>
+                    <p className="text-muted-background">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="bg-primary/5 rounded-2xl px-6 py-5 border border-foreground/20 inline-block">
+              <p className="text-xl font-semibold text-primary">
+                Get Your First 10 Free Review Requests
+              </p>
             </div>
           </motion.div>
 
@@ -106,11 +119,11 @@ export function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="bg-card rounded-2xl p-8 border "
+            className="bg-card rounded-2xl p-8 border text-foreground"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name and Email Row */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     Name <span className="text-destructive">*</span>
@@ -139,7 +152,7 @@ export function ContactForm() {
               </div>
 
               {/* Phone and Business Name Row */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="phone" className="text-sm font-medium">
                     Phone Number <span className="text-destructive">*</span>
@@ -170,7 +183,7 @@ export function ContactForm() {
               {/* Website */}
               <div className="space-y-2">
                 <label htmlFor="website" className="text-sm font-medium">
-                  Business Website <span className="text-muted-foreground">(optional)</span>
+                  Business Website <span className="text-muted-fbackround">(optional)</span>
                 </label>
                 <input
                   type="url"
@@ -183,7 +196,7 @@ export function ContactForm() {
               {/* Message */}
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
-                  Message <span className="text-muted-foreground">(optional)</span>
+                  Message <span className="text-muted-fbackround">(optional)</span>
                 </label>
                 <textarea
                   id="message"
@@ -219,4 +232,4 @@ export function ContactForm() {
       </div>
     </section>
   );
-}
+} 

@@ -52,7 +52,7 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 relative  bg-foreground/5">
 
-      <div className="max-w-[1050px] mx-auto px-6 md:px-0 ">
+      <div className="max-w-[1050px] mx-auto px-4 md:px-0 ">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
           <motion.h2
@@ -70,7 +70,7 @@ export function HowItWorks() {
             transition={{ delay: 0.1 }}
             className="text-xl text-muted-foreground max-w-2xl mx-auto"
           >
-            Three simple steps to boost your online presence
+            Four simple steps to boost your online presence
           </motion.p>
         </div>
 
