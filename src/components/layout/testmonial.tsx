@@ -3,13 +3,13 @@ import Iphone15Pro from "../magicui/iphone-15-pro";
 export function Testmonial() {
     return (
         <section className="py-20 bg-foreground/5">
-            <div className="max-w-[1050px] mx-auto px-6 md:px-0 space-y-12">
+            <div className="max-w-[1050px] overflow-hidden mx-auto px-6 md:px-0 space-y-12">
                 <div>
                     <h2 className="text-5xl w-full text-center sm:text-6xl lg:text-7xl font-bold tracking-tight">
                         Testiminials
                     </h2>
                 </div>
-                <div className="flex gap-4 items-center justify-center">
+                <div className="flex flex-col md:flex-row gap-4 items-center justify-center">
                     <div className="space-y-2 relative">
                         <Iphone15Pro
                             className="size-full max-h-[80vh]"

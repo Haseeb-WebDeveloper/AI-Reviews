@@ -80,7 +80,7 @@ export function HowItWorks() {
         >
           <CarouselContent>
             {steps.map((step, index) => (
-              <CarouselItem key={index}>
+              <CarouselItem key={step.number}>
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                   {/* Left Column - Content */}
                   <motion.div

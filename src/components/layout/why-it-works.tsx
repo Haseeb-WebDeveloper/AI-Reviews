@@ -2,7 +2,7 @@
 
 export function WhyItWorks() {
   return (
-    <section className="py-12 overflow-x-hidden">
+    <section className="py-12 overflow-hidden ">
       <div className="max-w-[1050px] mx-auto px-6 md:px-0">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 ">
           {/* Left Column - Content */}
@@ -68,7 +68,7 @@ export function WhyItWorks() {
                 className="rounded-xl shadow-2xl h-full w-full z-10"
               />
             </div>
-            <div className="absolute top-0 bottom-0 left-0 w-[800px] bg-gradient-to-br from-primary/10 to-primary/5 rounded-4xl bg-secondary"></div>
+            <div className="absolute top-0 bottom-0 left-0 max-w-[800px] w-full bg-gradient-to-br from-primary/10 to-primary/5 rounded-4xl bg-secondary"></div>
           </div>
         </div>
       </div>

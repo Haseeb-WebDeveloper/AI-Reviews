@@ -26,7 +26,7 @@ const productItems = [
     href: "/product/security",
   },
   {
-    title: "Integrations",
+    title: "Integrations", 
     description: "Supported integrations",
     href: "/product/integrations",
   },
@@ -41,7 +41,7 @@ export function Navbar() {
 
   return (
     <header className="max-w-[1050px] mx-auto px-4 md:px-6 w-full z-10 py-4">
-      <div className="flex items-center justify-between px-3 py-2.5 rounded-full border border-border bg-white">
+      <div className="flex items-center justify-between px-3 py-2.5 rounded-full border border-border bg-white relative">
         {/* Logo - Left */}
         <div className="flex items-center justify-start pl-1 md:pl-3">
           <Link href="/" className="flex items-center">
@@ -139,51 +139,44 @@ export function Navbar() {
         </div>
 
         {/* Mobile Menu (Dropdown) */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white mt-2 mx-4 p-4 rounded-lg shadow-lg border border-gray-200 z-20">
-            <div className="flex flex-col space-y-4">
-              <div className="border-b pb-2">
-                <div className="flex flex-col space-y-2 font-medium">
-                  <Link href="/product/overview" 
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-white mt-2 mx-4 p-4 rounded-lg shadow-lg border border-gray-200 z-20 transition-all duration-200 ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+          <div className="flex flex-col space-y-4">
+            <div className="border-b pb-2">
+              <div className="flex flex-col space-y-2 font-medium">
+                {productItems.map((item) => (
+                  <Link 
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 hover:bg-gray-100 rounded-md">
-                    Product overview
+                    className="p-2 hover:bg-gray-100 rounded-md"
+                  >
+                    {item.title}
                   </Link>
-                  <Link href="/product/security" 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 hover:bg-gray-100 rounded-md">
-                    Security
-                  </Link>
-                  <Link href="/product/integrations" 
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 hover:bg-gray-100 rounded-md">
-                    Integrations
-                  </Link>
-                </div>
+                ))}
               </div>
-              <Link href="/resources" 
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-md">
-                Resources
-              </Link>
-              <Link href="/pricing" 
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-md">
-                Pricing
-              </Link>
-              <Button className="w-full text-white rounded-full px-5 text-sm py-2 mt-2">
-                <Link href="/get-started" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center">
-                  Get started for free
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              </Button>
             </div>
+            <Link href="/resources" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 hover:bg-gray-100 rounded-md">
+              Resources
+            </Link>
+            <Link href="/pricing" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2 hover:bg-gray-100 rounded-md">
+              Pricing
+            </Link>
+            <Button className="w-full text-white rounded-full px-5 text-sm py-2 mt-2">
+              <Link href="/get-started" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full flex items-center justify-center">
+                Get started for free
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </Link>
+            </Button>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
