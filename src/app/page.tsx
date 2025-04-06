@@ -1,3 +1,4 @@
+import { ContactForm } from "@/components/layout/contact-form";
 import { Hero } from "@/components/layout/hero";
 import { HowItWorks } from "@/components/layout/how-it-works";
 import OurClients from "@/components/layout/our-clients";
@@ -14,6 +15,7 @@ export default function Home() {
       <HowItWorks />
       <Pricing />
       <Testmonial />
+      <ContactForm />
     </>
   );
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { useState } from "react";
 
 const productItems = [
   {
@@ -31,30 +33,57 @@ const productItems = [
 ];
 
 export function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
-    <header className="max-w-[1050px] mx-auto px-6 md:px-0 w-full z-10 py-4">
+    <header className="max-w-[1050px] mx-auto px-4 md:px-6 w-full z-10 py-4">
       <div className="flex items-center justify-between px-3 py-2.5 rounded-full border border-border bg-white">
         {/* Logo - Left */}
-        <div className="flex-1 flex items-center justify-start pl-3">
+        <div className="flex items-center justify-start pl-1 md:pl-3">
           <Link href="/" className="flex items-center">
             <span className="flex items-center gap-2">
-              <span className="text-xl font-bold">Rateourjob</span>
+              <span className="text-lg md:text-xl font-bold">Rateourjob</span>
             </span>
           </Link>
         </div>
 
-        {/* Navigation Items - Center */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="p-1"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </Button>
+        </div>
+
+        {/* Navigation Items - Center (Desktop) */}
+        <div className="hidden md:flex flex-1 items-center justify-center">
           <div className="flex items-center gap-6">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className=" text-sm px-4 py-2 rounded-full">
+                  <NavigationMenuTrigger className="text-sm px-4 py-2 rounded-full">
                     Product
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-screen max-w-2xl p-6">
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="p-4 rounded-lg">
                           <div className="mb-4 p-2 bg-white rounded-lg shadow-sm w-full">
                             <p className="text-sm text-gray-600">Do we have insights on customers' impulse buying?</p>
@@ -75,7 +104,7 @@ export function Navbar() {
                           <div className="mb-4 grid grid-cols-3 gap-2">
                             {['gmail', 'onedrive', 'office'].map((icon, index) => (
                               <div key={index} className="bg-white rounded-full p-2 flex justify-center items-center shadow-sm">
-                                <div className="w-5 h-5 rounded-full "></div>
+                                <div className="w-5 h-5 rounded-full"></div>
                               </div>
                             ))}
                           </div>
@@ -99,15 +128,62 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Buttons - Right */}
-        <div className="flex-1 flex items-center justify-end gap-4">
-          <Button className=" hover: text-white rounded-full px-5 text-sm">
+        {/* Buttons - Right (Desktop) */}
+        <div className="hidden md:flex flex-1 items-center justify-end gap-4">
+          <Button className="text-white rounded-full px-5 text-sm">
             <Link href="/get-started">Get started for free</Link>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
           </Button>
         </div>
+
+        {/* Mobile Menu (Dropdown) */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-white mt-2 mx-4 p-4 rounded-lg shadow-lg border border-gray-200 z-20">
+            <div className="flex flex-col space-y-4">
+              <div className="border-b pb-2">
+                <div className="flex flex-col space-y-2 font-medium">
+                  <Link href="/product/overview" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-md">
+                    Product overview
+                  </Link>
+                  <Link href="/product/security" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-md">
+                    Security
+                  </Link>
+                  <Link href="/product/integrations" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-md">
+                    Integrations
+                  </Link>
+                </div>
+              </div>
+              <Link href="/resources" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-md">
+                Resources
+              </Link>
+              <Link href="/pricing" 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-md">
+                Pricing
+              </Link>
+              <Button className="w-full text-white rounded-full px-5 text-sm py-2 mt-2">
+                <Link href="/get-started" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center">
+                  Get started for free
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

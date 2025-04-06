@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 const plans = [
   {
@@ -48,41 +49,30 @@ export function Pricing() {
 
       <div className="max-w-[1050px] mx-auto px-6 md:px-0">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+        <div className="text-center space-y-4 mb-12">
+          <h2
             className="text-4xl font-bold"
           >
             Simple, Transparent Pricing
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          </h2>
+          <p
             className="text-xl text-muted-background max-w-2xl mx-auto"
           >
             No hidden fees. No contracts. Cancel anytime.
-          </motion.p>
+          </p>
         </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-2 gap-8">
           {plans.map((plan, index) => (
-            <motion.div
+            <div
               key={plan.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
               className="relative"
             >
               {plan.isPopular && (
                 <div className="absolute -top-4 left-0 right-0 flex justify-center">
                   <span className="bg-primary text-primary-foreground text-sm font-medium px-3 py-1 rounded-full">
-                    with no website
+                    With Custom Website
                   </span>
                 </div>
               )}
@@ -112,15 +102,18 @@ export function Pricing() {
                   </ul>
 
                   {/* CTA Button */}
-                  <Button 
+                 <Link href="/contact" className="cursor-pointer">
+                 <Button 
                     className="w-full"
-                    variant={plan.isPopular ? "default" : "outline"}
+                    variant= "default"
+                    size="lg"
                   >
                     Get Started
                   </Button>
+                 </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
