@@ -27,62 +27,68 @@ const Logos3 = ({
     {
       id: "logo-1",
       description: "Logo 1",
-      image: "https://shadcnblocks.com/images/block/logos/astro.svg",
-      className: "h-7 w-auto",
+      image: "/clients/1.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-2",
       description: "Logo 2",
-      image: "https://shadcnblocks.com/images/block/logos/figma.svg",
-      className: "h-7 w-auto",
+      image: "/clients/2.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-3",
       description: "Logo 3",
-      image: "https://shadcnblocks.com/images/block/logos/nextjs.svg",
-      className: "h-7 w-auto",
+      image: "/clients/3.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-4",
       description: "Logo 4",
-      image: "https://shadcnblocks.com/images/block/logos/react.png",
-      className: "h-7 w-auto",
+      image: "/clients/4.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-5",
       description: "Logo 5",
-      image: "https://shadcnblocks.com/images/block/logos/shadcn-ui.svg",
-      className: "h-7 w-auto",
+      image: "/clients/5.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-6",
       description: "Logo 6",
-      image: "https://shadcnblocks.com/images/block/logos/supabase.svg",
-      className: "h-7 w-auto",
+      image: "/clients/6.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-7",
       description: "Logo 7",
-      image: "https://shadcnblocks.com/images/block/logos/tailwind.svg",
-      className: "h-4 w-auto",
+      image: "/clients/7.jpg",
+      className: "h-12 w-auto",
     },
     {
       id: "logo-8",
       description: "Logo 8",
-      image: "https://shadcnblocks.com/images/block/logos/vercel.svg",
-      className: "h-7 w-auto",
+      image: "/clients/8.jpg",
+      className: "h-12 w-auto",
+    },
+    {
+      id: "logo-9",
+      description: "Logo 9",
+      image: "/clients/9.jpg",
+      className: "h-12 w-auto",
     },
   ],
 }: Logos3Props) => {
   return (
-    <section className="py-20">
-      <div className="max-w-[1050px] mx-auto px-6 md:px-0 flex flex-col items-center text-center">
-        <h1 className="my-6 text-pretty text-sm md:text-lg">
+     <>
+       <div className=" mx-auto  md:px-0 flex flex-col items-center text-center">
+        <h1 className="mb-4 text-pretty text-sm md:text-xl">
           {heading}
         </h1>
       </div>
       <div className="pt-5">
-        <div className="relative mx-auto flex items-center justify-center lg:max-w-5xl">
+        <div className="relative mx-auto flex items-center justify-center">
           <Carousel
             opts={{ loop: true }}
             plugins={[AutoScroll({ playOnInit: true })]}
@@ -106,11 +112,11 @@ const Logos3 = ({
               ))}
             </CarouselContent>
           </Carousel>
-          <div className="absolute inset-y-0 left-0 w-[50%] bg-gradient-to-r from-background to-transparent"></div>
-          <div className="absolute inset-y-0 right-0 w-[50%] bg-gradient-to-l from-background to-transparent"></div>
+          <div className="absolute inset-y-0 left-0 w-[20%] bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute inset-y-0 right-0 w-[20%] bg-gradient-to-l from-white to-transparent"></div>
         </div>
       </div>
-    </section>
+     </>
   );
 };
 

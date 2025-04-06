@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { Instagram, Facebook, Linkedin, MessageCircle, Mail, Phone } from "lucide-react";
 import { useState } from "react";
 
 export function ContactForm() {
@@ -50,7 +50,7 @@ export function ContactForm() {
   };
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="contact"  className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
@@ -58,58 +58,45 @@ export function ContactForm() {
 
       <div className="max-w-[1050px] mx-auto px-6 md:px-0">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Content */}
+          {/* Left Column - Contact Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="space-y-6">
-              <h1 className="text-4xl font-bold">
-                More Reviews = More Traffic = More Customers
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                It's simple math:
-              </p>
-            </div>
+            <h1 className="text-4xl font-bold">Contact Us</h1>
 
             <div className="space-y-6">
-              {[
-                {
-                  title: "More Reviews",
-                  description: "Google ranks you higher → More people see your business",
-                },
-                {
-                  title: "More Visibility",
-                  description: "More clicks → More walk-ins, calls, and online bookings",
-                },
-                {
-                  title: "More Social Proof",
-                  description: "Less hesitation → More customers choosing YOU over competitors",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-3"
-                >
-                  <Star className="size-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-xl">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="flex items-center gap-3">
+                <MessageCircle className="size-6 text-primary" />
+                <p className="text-lg">Live Chat with our AI Specialist</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Mail className="size-6 text-primary" />
+                <p className="text-lg">Email: info@rateourjob.com</p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Phone className="size-6 text-primary" />
+                <p className="text-lg">WhatsApp: +923144174625</p>
+              </div>
             </div>
 
-            <div className="bg-primary/5 rounded-2xl p-6 border">
-              <p className="text-xl font-semibold text-primary">
-                Get Your First 10 Free Review Requests
-              </p>
+            <div className="space-y-4">
+              <p className="text-lg font-medium">Follow us on social media:</p>
+              <div className="flex gap-4">
+                <a href="https://www.instagram.com/rateourjob/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  <Instagram className="size-8" />
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61574592760873" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  <Facebook className="size-8" />
+                </a>
+                <a href="https://www.linkedin.com/company/rateourjob/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+                  <Linkedin className="size-8" />
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -232,4 +219,4 @@ export function ContactForm() {
       </div>
     </section>
   );
-} 
+}

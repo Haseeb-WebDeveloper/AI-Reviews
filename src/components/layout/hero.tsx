@@ -1,39 +1,40 @@
 import { Button } from "@/components/ui/button";
 import { AvatarCircles } from "../magicui/avatar-circles";
 import HeroVideoDialog from "../magicui/hero-video-dialog";
+import Link from "next/link";
 
 export function Hero() {
 
 
     const avatars = [
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/16860528",
-            profileUrl: "https://github.com/dillionverma",
+            imageUrl: "/avatar/1.jpg",
+            profileUrl: "/avatar/1.jpg"
         },
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/20110627",
-            profileUrl: "https://github.com/tomonarifeehan",
+            imageUrl: "/avatar/2.jpg",
+            // profileUrl: "/avatar/2.jpg"
         },
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/106103625",
-            profileUrl: "https://github.com/BankkRoll",
+            imageUrl: "/avatar/3.png",
+            // profileUrl: "/avatar/3.png"
         },
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/59228569",
-            profileUrl: "https://github.com/safethecode",
+            imageUrl: "/avatar/4.jpeg",
+            // profileUrl: "/avatar/4.jpeg"
         },
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/59442788",
-            profileUrl: "https://github.com/sanjay-mali",
+            imageUrl: "/avatar/5.jpg",
+            // profileUrl: "/avatar/5.jpg"
         },
         {
-            imageUrl: "https://avatars.githubusercontent.com/u/89768406",
-            profileUrl: "https://github.com/itsarghyadas",
+            imageUrl: "/avatar/6.jpeg",
+            // profileUrl: "/avatar/6.jpeg"
         },
     ];
 
     return (
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20">
+        <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-32 pb-16 md:pt-36">
             {/* Main Content Container */}
             <div className="max-w-4xl mx-auto text-center space-y-8">
                 {/* Heading */}
@@ -55,9 +56,11 @@ export function Hero() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" className="text-lg px-8 py-6">
-                        Start Totally Free
-                    </Button>
+                        <Button size="lg" className="text-lg px-8 py-6">
+                    <Link href="/get-started">
+                            Start Totally Free
+                        </Link>
+                        </Button>
                     {/* <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                         Watch Demo
                     </Button> */}
@@ -70,15 +73,8 @@ export function Hero() {
                     <HeroVideoDialog
                         className="block dark:hidden"
                         animationStyle="top-in-bottom-out"
-                        videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-                        thumbnailSrc="https://startup-template-sage.vercel.app/hero-light.png"
-                        thumbnailAlt="Hero Video"
-                    />
-                    <HeroVideoDialog
-                        className="hidden dark:block"
-                        animationStyle="top-in-bottom-out"
-                        videoSrc="https://www.youtube.com/embed/qh3NGpYRG3I?si=4rb-zSdDkVK9qxxb"
-                        thumbnailSrc="https://startup-template-sage.vercel.app/hero-dark.png"
+                        videoSrc="/test-video.mp4"
+                        thumbnailSrc="/test-video-thumbnail.jpg"
                         thumbnailAlt="Hero Video"
                     />
                 </div>
