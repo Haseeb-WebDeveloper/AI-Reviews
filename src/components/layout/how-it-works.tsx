@@ -41,14 +41,14 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-24 relative overflow-x-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-[1050px] mx-auto px-6 md:px-0">
+      <div className="max-w-[1050px] mx-auto px-6 md:px-0 overflow-x-hidden">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
           <motion.h2
