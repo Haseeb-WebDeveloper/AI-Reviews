@@ -12,6 +12,7 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePopup } from "@/context/popup-context";
 
 const steps = [
   {
@@ -49,6 +50,7 @@ const steps = [
 ];
 
 export function HowItWorks() {
+  const { openContactForm } = usePopup();
   return (
     <section id="how-it-works" className="py-24 relative  bg-foreground/5">
 
@@ -104,12 +106,10 @@ export function HowItWorks() {
                         </p>
                       </div>
 
-                      <Link href={step.buttonLink}>
-                        <Button size="lg" className="group">
+                        <Button size="lg" className="group cursor-pointer" onClick={openContactForm}>
                           {step.buttonText}
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                          <ArrowRight className="ml-2 h-4 w-4 cursor-pointer transition-transform group-hover:translate-x-1" />
                         </Button>
-                      </Link>
                     </motion.div>
 
                     {/* Right Column - Image */}

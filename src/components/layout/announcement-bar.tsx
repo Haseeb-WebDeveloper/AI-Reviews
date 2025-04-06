@@ -2,9 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import { usePopup } from "@/context/popup-context";
 
 export function AnnouncementBar() {
+  const { openContactForm } = usePopup();
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -37,12 +40,11 @@ export function AnnouncementBar() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="fixed top-0 left-0 right-0 bg-secondary text-background z-60"
+          className="fixed top-0 left-0 right-0 bg-secondary text-background z-50"
         >
           <div className="max-w-[1050px] mx-auto px-4 md:px-0">
             <div className="flex items-center justify-center py-2 text-sm md:text-base">
-              <Link
-                href="#contact"
+              <div
                 className="flex items-center gap-x-2 group"
               >
                 <span className="inline-block animate-pulse h-2.5 w-2.5 bg-background rounded-full"></span>
@@ -61,11 +63,11 @@ export function AnnouncementBar() {
                     clipRule="evenodd"
                   />
                 </svg>
-                <Link href="#contact"
-                  className="flex items-center justify-center rounded-full text-xs bg-secondary border border-background px-2.5 py-1 hover:px-3 transition-all duration-300 -z-0">
+                <Button onClick={openContactForm}
+                  className="flex items-center justify-center rounded-full text-xs bg-secondary border border-background px-2.5 py-1 hover:px-3 transition-all duration-300 -z-0 cursor-pointer">
                   Start Now
-                </Link>
-              </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </motion.div>

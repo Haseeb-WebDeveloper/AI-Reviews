@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Check, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { usePopup } from "@/context/popup-context";
 
 const plans = [
   {
@@ -88,6 +89,10 @@ const plans = [
 ];
 
 export function Pricing() {
+
+  // Inside your component:
+const { openContactForm } = usePopup();
+
   return (
     <TooltipProvider>
       <section id="pricing" className="pt-20 pb-24 relative">
@@ -158,11 +163,9 @@ export function Pricing() {
                    </div>
 
                     {/* CTA Button */}
-                    <Link href="#contact" className="block">
-                      <Button className="w-full" variant="default" size="lg">
+                      <Button onClick={openContactForm} className="block w-full cursor-pointer" variant="default" size="lg">
                         Get Started
                       </Button>
-                    </Link>
                   </div>
                 </div>
               </div>

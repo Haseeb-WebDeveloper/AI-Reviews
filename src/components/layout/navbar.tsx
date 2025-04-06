@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { usePopup } from "@/context/popup-context";
 
 export function Navbar() {
+  const { openContactForm } = usePopup();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -129,8 +131,8 @@ export function Navbar() {
 
           {/* Buttons - Right (Desktop) */}
           <div className="hidden md:flex items-center justify-end gap-4 ">
-            <Button className="text-white rounded-full px-5 text-sm">
-              <Link href="#contact">Get 10 Reviews Free</Link>
+            <Button className="text-white rounded-full px-5 text-sm cursor-pointer" onClick={openContactForm}>
+              Get 10 Reviews Free
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
@@ -157,15 +159,11 @@ export function Navbar() {
                   Testimonials
                 </Link>
                 <div className="mt-4 pt-6 border-t">
-                  <Button className="w-full text-white rounded-full px-5 py-6 text-base">
-                    <Link href="#contact" 
-                      // onClick={() => setMobileMenuOpen(false)}
-                      className="w-full flex items-center justify-center">
-                      Get 10 Reviews Free
+                  <Button className="w-full text-white rounded-full px-5 py-6 text-base cursor-pointer" onClick={openContactForm}>
+                    Get 10 Reviews Free
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
-                    </Link>
                   </Button>
                 </div>
               </div>

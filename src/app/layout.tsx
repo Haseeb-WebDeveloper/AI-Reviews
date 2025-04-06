@@ -8,6 +8,7 @@ import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Footer } from "@/components/layout/footer";
+import { PopupProvider } from "@/context/popup-context";
 
 export const metadata: Metadata = {
   title: "Rate our job",
@@ -28,21 +29,23 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main>
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-              <DotPattern
-                className={cn(
-                  "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-                )}
-              />
-            </div>
-            <SmoothScrolling>
-              <AnnouncementBar />
-              <Navbar />
-              {children}
-              <Footer />
-            </SmoothScrolling>
-          </main>
+          <PopupProvider>
+            <main>
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                <DotPattern
+                  className={cn(
+                    "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+                  )}
+                />
+              </div>
+              <SmoothScrolling>
+                <AnnouncementBar />
+                <Navbar />
+                {children}
+                <Footer />
+              </SmoothScrolling>
+            </main>
+          </PopupProvider>
         </ThemeProvider>
       </body>
     </html>

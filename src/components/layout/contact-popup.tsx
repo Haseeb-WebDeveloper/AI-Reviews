@@ -1,11 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 
-export function ContactForm() {
+interface ContactPopupProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
@@ -39,6 +44,9 @@ export function ContactForm() {
         message: "Thank you! We'll be in touch soon.",
       });
       form.reset();
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (error) {
       setSubmitStatus({
         type: "error",
@@ -50,77 +58,39 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-foreground text-background">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-[1050px] mx-auto px-4 md:px-0">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Content */}
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={onClose}
+        >
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-xl bg-card rounded-2xl p-8 border text-foreground shadow-xl  overflow-y-auto"
           >
-            <div className="space-y-6">
-              <h1 className="text-4xl font-bold">
-                More Reviews = More Traffic = More Customers
-              </h1>
-              <p className="text-xl text-muted-background">
-                It's simple math:
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 p-2 hover:bg-foreground/5 rounded-full transition-colors"
+            >
+              <X className="size-5" />
+            </button>
+
+            {/* Form Header */}
+            <div className="mb-8 text-center">
+              <h2 className="text-2xl font-bold mb-2">Get Started Free</h2>
+              <p className="text-muted-foreground">
+                Get Your First 10 Reviews Totally Free
               </p>
             </div>
 
-            <div className="space-y-6">
-              {[
-                {
-                  title: "More Reviews",
-                  description: "Google ranks you higher → More people see your business",
-                },
-                {
-                  title: "More Visibility",
-                  description: "More clicks → More walk-ins, calls, and online bookings",
-                },
-                {
-                  title: "More Social Proof",
-                  description: "Less hesitation → More customers choosing YOU over competitors",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-3"
-                >
-                  <Star className="size-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold text-xl">{item.title}</h3>
-                    <p className="text-muted-background">{item.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="bg-primary/5 rounded-2xl px-6 py-5 border border-foreground/20 inline-block">
-              <p className="text-xl font-semibold text-primary">
-                Get Your First 10 Free Review Requests
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Right Column - Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="bg-card rounded-2xl p-8 border text-foreground"
-          >
+            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name and Email Row */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -131,6 +101,7 @@ export function ContactForm() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                     placeholder="John Doe"
@@ -144,9 +115,10 @@ export function ContactForm() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="hsaeeb@example.com"
+                    placeholder="john@example.com"
                   />
                 </div>
               </div>
@@ -160,6 +132,7 @@ export function ContactForm() {
                   <input
                     type="tel"
                     id="phone"
+                    name="phone"
                     required
                     className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                     placeholder="+1 (555) 000-0000"
@@ -173,6 +146,7 @@ export function ContactForm() {
                   <input
                     type="text"
                     id="business"
+                    name="business"
                     required
                     className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                     placeholder="Your Business Name"
@@ -183,11 +157,12 @@ export function ContactForm() {
               {/* Website */}
               <div className="space-y-2">
                 <label htmlFor="website" className="text-sm font-medium">
-                  Business Website <span className="text-muted-fbackround">(optional)</span>
+                  Business Website <span className="text-muted-foreground">(optional)</span>
                 </label>
                 <input
                   type="url"
                   id="website"
+                  name="website"
                   className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
                   placeholder="https://example.com"
                 />
@@ -196,10 +171,11 @@ export function ContactForm() {
               {/* Message */}
               <div className="space-y-2">
                 <label htmlFor="message" className="text-sm font-medium">
-                  Message <span className="text-muted-fbackround">(optional)</span>
+                  Message <span className="text-muted-foreground">(optional)</span>
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={3}
                   className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all resize-none"
                   placeholder="Any additional information..."
@@ -228,8 +204,8 @@ export function ContactForm() {
               </Button>
             </form>
           </motion.div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 } 

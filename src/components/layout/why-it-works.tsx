@@ -1,6 +1,10 @@
 "use client";
 
+import { usePopup } from "@/context/popup-context";
+
 export function WhyItWorks() {
+  const { openContactForm } = usePopup();
+  
   return (
     <section className="py-20 md:py-32 overflow-hidden ">
       <div className="max-w-[1050px] mx-auto px-4 md:px-0">

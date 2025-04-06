@@ -2,9 +2,10 @@ import { Button } from "@/components/ui/button";
 import { AvatarCircles } from "../magicui/avatar-circles";
 import HeroVideoDialog from "../magicui/hero-video-dialog";
 import Link from "next/link";
+import { usePopup } from "@/context/popup-context";
 
 export function Hero() {
-
+    const { openContactForm } = usePopup();
 
     const avatars = [
         {
@@ -46,7 +47,7 @@ export function Hero() {
 
                 {/* Description */}
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-                    ⭐ More Reviews = More Trust = More Customers ⭐
+                    ⭐ More Reviews = More Trust = More Customers ⭐
                 </p>
 
                 {/* avatars */}
@@ -56,10 +57,8 @@ export function Hero() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button size="lg" className="text-lg px-8 py-6">
-                        <Link href="/get-started">
-                            Start Totally Free
-                        </Link>
+                    <Button size="lg" className="text-lg px-8 py-6 cursor-pointer" onClick={openContactForm}>
+                        Start Totally Free
                     </Button>
                     {/* <Button size="lg" variant="outline" className="text-lg px-8 py-6">
                         Watch Demo
