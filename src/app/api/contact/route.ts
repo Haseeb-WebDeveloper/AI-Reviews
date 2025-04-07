@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { 
         message: "Emails sent successfully",
-        redirectUrl: "https://haseebkhan.online/"
+        redirectUrl: "https://calendly.com/rateourjob/30min"
       },
       { status: 200 }
     );
