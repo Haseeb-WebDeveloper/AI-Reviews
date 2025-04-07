@@ -63,10 +63,17 @@ export function AnnouncementBar() {
                     clipRule="evenodd"
                   />
                 </svg>
+                <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                >
                 <Button onClick={openContactForm}
                   className="flex items-center justify-center rounded-full text-xs bg-secondary border border-background px-2.5 py-1 hover:px-3 transition-all duration-300 -z-0 cursor-pointer">
                   Start Now
                 </Button>
+                </motion.div>
               </div>
             </div>
           </div>

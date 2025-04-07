@@ -71,7 +71,7 @@ export function Navbar() {
 
   // Navbar container styles with transition
   const navbarContainerStyles = `fixed ${
-    isAtTop ? 'top-8' : '-top-2'
+    isAtTop ? 'md:top-12 top-12' : '-top-2'
   } left-0 right-0 z-40 transition-all duration-300 ease-in-out ${
     visible ? 'translate-y-0' : '-translate-y-full'
   }`;

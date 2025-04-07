@@ -6,6 +6,8 @@ import { Check, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { usePopup } from "@/context/popup-context";
+import { useState } from "react";
+import React from "react";
 
 const plans = [
   {
@@ -88,10 +90,40 @@ const plans = [
   },
 ];
 
-export function Pricing() {
+// Add a new interface for tooltip state
+interface TooltipState {
+  featureIndex: number;
+  planIndex: number;
+}
 
-  // Inside your component:
-const { openContactForm } = usePopup();
+export function Pricing() {
+  const { openContactForm } = usePopup();
+  // Add state for mobile tooltip
+  const [activeTooltip, setActiveTooltip] = useState<TooltipState | null>(null);
+
+  // Add handler for mobile tooltip clicks
+  const handleTooltipClick = (planIndex: number, featureIndex: number, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // If clicking the same tooltip, close it
+    if (activeTooltip?.planIndex === planIndex && activeTooltip?.featureIndex === featureIndex) {
+      setActiveTooltip(null);
+    } else {
+      setActiveTooltip({ planIndex, featureIndex });
+    }
+  };
+
+  // Add click handler for closing tooltip when clicking outside
+  const handleOutsideClick = () => {
+    setActiveTooltip(null);
+  };
+
+  // Add useEffect to add global click listener
+  React.useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
 
   return (
     <TooltipProvider>
@@ -115,7 +147,7 @@ const { openContactForm } = usePopup();
 
           {/* Pricing Cards */}
           <div className="grid md:grid-cols-2 gap-8">
-            {plans.map((plan) => (
+            {plans.map((plan, planIndex) => (
               <div key={plan.name} className="relative">
                 {plan.isPopular && (
                   <div className="absolute -top-4 left-0 right-0 flex justify-center">
@@ -142,21 +174,39 @@ const { openContactForm } = usePopup();
 
                     {/* Features */}
                     <ul className="space-y-4">
-                      {plan.features.map((feature) => (
+                      {plan.features.map((feature, featureIndex) => (
                         <li key={feature.title} className="flex items-start gap-3">
                           <Check className="size-5 text-primary flex-shrink-0 mt-1" />
                           <span className="text-muted-background flex-1">{feature.title}</span>
+                          
+                          {/* Desktop Tooltip (hidden on mobile) */}
                           <Tooltip delayDuration={0}>
-                            <TooltipTrigger className="cursor-pointer">
+                            <TooltipTrigger className="hidden md:inline-flex cursor-pointer">
                               <HelpCircle className="size-5 text-muted-background/50 hover:text-primary transition-colors" />
                             </TooltipTrigger>
-                            <TooltipContent side="left" sideOffset={10} className="hidden md:block">
+                            <TooltipContent side="left" sideOffset={10}>
                               <p className="max-w-xs text-base p-2">{feature.description}</p>
                             </TooltipContent>
-                            <TooltipContent side="top" className="md:hidden">
-                              <p className="max-w-[280px] text-sm p-2">{feature.description}</p>
-                            </TooltipContent>
                           </Tooltip>
+
+                          {/* Mobile Tooltip (hidden on desktop) */}
+                          <div className="md:hidden relative">
+                            <HelpCircle 
+                              className="size-5 text-muted-background/50 hover:text-primary transition-colors cursor-pointer"
+                              onClick={(e) => handleTooltipClick(planIndex, featureIndex, e)}
+                            />
+                            {activeTooltip?.planIndex === planIndex && 
+                             activeTooltip?.featureIndex === featureIndex && (
+                              <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="absolute z-50 bottom-full right-0 mb-2 w-64 p-2 bg-popover text-popover-foreground rounded-lg shadow-lg border"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <p className="text-sm">{feature.description}</p>
+                              </motion.div>
+                            )}
+                          </div>
                         </li>
                       ))}
                     </ul>
