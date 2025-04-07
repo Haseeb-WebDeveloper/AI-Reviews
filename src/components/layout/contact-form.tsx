@@ -30,8 +30,10 @@ export function ContactForm() {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to submit form");
+        throw new Error(result.error || "Failed to submit form");
       }
 
       setSubmitStatus({
@@ -39,6 +41,11 @@ export function ContactForm() {
         message: "Thank you! We'll be in touch soon.",
       });
       form.reset();
+
+      // Add delay before redirect
+      setTimeout(() => {
+        window.location.href = result.redirectUrl;
+      }, 2000);
     } catch (error) {
       setSubmitStatus({
         type: "error",
@@ -220,7 +227,7 @@ export function ContactForm() {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full cursor-pointer"
                 size="lg"
                 disabled={isSubmitting}
               >

@@ -73,7 +73,7 @@ export function Hero() {
                         className="block dark:hidden"
                         animationStyle="top-in-bottom-out"
                         videoSrc="/hero-video.mp4"
-                        thumbnailSrc="/test-video-thumbnail.jpg"
+                        thumbnailSrc="/hero-video-testimonial.jpg"
                         thumbnailAlt="Hero Video"
                     />
                 </div>

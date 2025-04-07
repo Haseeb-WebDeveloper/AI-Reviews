@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-// Create transporter
+// Create transporter with updated settings
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: true,
+  host: "smtp-relay.brevo.com", // Updated host
+  port: 587,
+  secure: false, // Changed to false for port 587
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -52,8 +52,12 @@ export async function POST(req: Request) {
       `,
     });
 
+    // Return success response with redirect URL
     return NextResponse.json(
-      { message: "Emails sent successfully" },
+      { 
+        message: "Emails sent successfully",
+        redirectUrl: "https://haseebkhan.online/"
+      },
       { status: 200 }
     );
   } catch (error) {

@@ -85,7 +85,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.webp" alt="Rateourjob" width={100} height={100} className="w-10 h-10" />
               <span className="flex items-center gap-2">
-                <span className="text-lg md:text-xl font-bold uppercase">Rateourjob</span>
+                <span className="text-lg md:text-xl font-bold">RateOurJob</span>
               </span>
             </Link>
           </div>

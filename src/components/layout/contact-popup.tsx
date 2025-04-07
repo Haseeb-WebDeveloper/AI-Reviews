@@ -35,8 +35,10 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
         body: JSON.stringify(data),
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to submit form");
+        throw new Error(result.error || "Failed to submit form");
       }
 
       setSubmitStatus({
@@ -44,8 +46,11 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
         message: "Thank you! We'll be in touch soon.",
       });
       form.reset();
+
+      // Close popup and redirect after delay
       setTimeout(() => {
         onClose();
+        window.location.href = result.redirectUrl;
       }, 2000);
     } catch (error) {
       setSubmitStatus({
@@ -196,7 +201,7 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
 
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full cursor-pointer"
                 size="lg"
                 disabled={isSubmitting}
               >
