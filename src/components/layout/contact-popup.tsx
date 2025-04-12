@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 interface ContactPopupProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ContactPopupProps {
 
 export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
     type: "success" | "error" | null;
     message: string;
@@ -46,11 +48,14 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
         message: "Thank you! We'll be in touch soon.",
       });
       form.reset();
+      setIsSubmitted(true);
 
-      // Close popup and redirect after delay
+      // Open Calendly in new tab and show success message
+      window.open("https://calendly.com/rateourjob/30min", "_blank");
+      
+      // Optional: Close the popup after a delay
       setTimeout(() => {
         onClose();
-        window.location.href = result.redirectUrl;
       }, 2000);
     } catch (error) {
       setSubmitStatus({
@@ -77,7 +82,7 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-xl bg-card rounded-2xl p-8 border text-foreground shadow-xl  overflow-y-auto"
+            className="relative w-full max-w-xl bg-card rounded-2xl p-8 border text-foreground shadow-xl overflow-y-auto"
           >
             {/* Close Button */}
             <button
@@ -87,130 +92,151 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
               <X className="size-5" />
             </button>
 
-            {/* Form Header */}
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-bold mb-2">Get Started Free</h2>
-              <p className="text-muted-foreground">
-                Get Your First 10 Reviews Totally Free
-              </p>
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name and Email Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name <span className="text-destructive">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email <span className="text-destructive">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="john@example.com"
-                  />
-                </div>
+            {isSubmitted ? (
+              <div className="text-center py-12">
+                <h2 className="text-2xl font-bold mb-4">You Need to Book a Free Demo Call</h2>
+                <p className="text-lg text-muted-foreground">
+                  We've opened a new tab where you can{" "}
+                  <span className="text-primary">book a free demo call with our team.</span> If you
+                  weren't redirected automatically, please {" "}
+                  <Link
+                    href="https://calendly.com/rateourjob/30min"
+                    target="_blank"
+                    className="text-primary underline"
+                  >
+                    click here
+                  </Link>
+                  .
+                </p>
               </div>
-
-              {/* Phone and Business Name Row */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium">
-                    Phone Number <span className="text-destructive">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="+1 (555) 000-0000"
-                  />
+            ) : (
+              <>
+                {/* Form Header */}
+                <div className="mb-8 text-center">
+                  <h2 className="text-2xl font-bold mb-2">Get Started Free</h2>
+                  <p className="text-muted-foreground">
+                    Get Your First 10 Reviews Totally Free
+                  </p>
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="business" className="text-sm font-medium">
-                    Business Name <span className="text-destructive">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="business"
-                    name="business"
-                    required
-                    className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="Your Business Name"
-                  />
-                </div>
-              </div>
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name and Email Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="name" className="text-sm font-medium">
+                        Name <span className="text-destructive">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        placeholder="John Doe"
+                      />
+                    </div>
 
-              {/* Website */}
-              <div className="space-y-2">
-                <label htmlFor="website" className="text-sm font-medium">
-                  Business Website <span className="text-muted-foreground">(optional)</span>
-                </label>
-                <input
-                  type="url"
-                  id="website"
-                  name="website"
-                  className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                  placeholder="https://example.com"
-                />
-              </div>
+                    <div className="space-y-2">
+                      <label htmlFor="email" className="text-sm font-medium">
+                        Email <span className="text-destructive">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                  </div>
 
-              {/* Message */}
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
-                  Message <span className="text-muted-foreground">(optional)</span>
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={3}
-                  className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all resize-none"
-                  placeholder="Any additional information..."
-                />
-              </div>
+                  {/* Phone and Business Name Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <label htmlFor="phone" className="text-sm font-medium">
+                        Phone Number <span className="text-destructive">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        placeholder="+1 (555) 000-0000"
+                      />
+                    </div>
 
-              {submitStatus.type && (
-                <div
-                  className={`p-4 rounded-lg ${
-                    submitStatus.type === "success"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {submitStatus.message}
-                </div>
-              )}
+                    <div className="space-y-2">
+                      <label htmlFor="business" className="text-sm font-medium">
+                        Business Name <span className="text-destructive">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="business"
+                        name="business"
+                        required
+                        className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        placeholder="Your Business Name"
+                      />
+                    </div>
+                  </div>
 
-              <Button
-                type="submit"
-                className="w-full cursor-pointer"
-                size="lg"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? "Sending..." : "Get Started Free"}
-              </Button>
-            </form>
+                  {/* Website */}
+                  <div className="space-y-2">
+                    <label htmlFor="website" className="text-sm font-medium">
+                      Business Website <span className="text-muted-foreground">(optional)</span>
+                    </label>
+                    <input
+                      type="url"
+                      id="website"
+                      name="website"
+                      className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                      placeholder="https://example.com"
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-sm font-medium">
+                      Message <span className="text-muted-foreground">(optional)</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={3}
+                      className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all resize-none"
+                      placeholder="Any additional information..."
+                    />
+                  </div>
+
+                  {submitStatus.type && (
+                    <div
+                      className={`p-4 rounded-lg ${
+                        submitStatus.type === "success"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {submitStatus.message}
+                    </div>
+                  )}
+
+                  <Button
+                    type="submit"
+                    className="w-full cursor-pointer"
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Get Started Free"}
+                  </Button>
+                </form>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
-} 
+}

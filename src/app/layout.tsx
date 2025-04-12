@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Footer } from "@/components/layout/footer";
 import { PopupProvider } from "@/context/popup-context";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Rate our job",
@@ -31,6 +32,7 @@ export default function RootLayout({
         >
           <PopupProvider>
             <main>
+              <Analytics />
               <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
                 <DotPattern
                   className={cn(

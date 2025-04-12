@@ -42,10 +42,9 @@ export function ContactForm() {
       });
       form.reset();
 
-      // Add delay before redirect
-      setTimeout(() => {
-        window.location.href = result.redirectUrl;
-      }, 2000);
+      // Open Calendly in new tab
+      window.open("https://calendly.com/rateourjob/30min", "_blank");
+      
     } catch (error) {
       setSubmitStatus({
         type: "error",

@@ -16,11 +16,12 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     const { name, email, phone, business, website, message } = data;
+    console.log(data);
 
     // Send email to admin
     await transporter.sendMail({
-      from: process.env.SMTP_FROM,
-      to: "web.dev.haseeb@gmail.com",
+      from: process.env.SMTP_ADMIN,
+      to: process.env.SMTP_ADMIN,
       subject: "New Contact Form Submission",
       html: `
         <h2>New Contact Form Submission</h2>
@@ -33,9 +34,11 @@ export async function POST(req: Request) {
       `,
     });
 
+    console.log("Email sent to admin at ", process.env.SMTP_ADMIN);
+
     // Send thank you email to client
     await transporter.sendMail({
-      from: process.env.SMTP_FROM,
+      from: process.env.SMTP_ADMIN,
       to: email,
       subject: "Thank you for contacting us!",
       html: `
@@ -52,11 +55,10 @@ export async function POST(req: Request) {
       `,
     });
 
-    // Return success response with redirect URL
+    // Return success response without redirect URL
     return NextResponse.json(
       { 
-        message: "Emails sent successfully",
-        redirectUrl: "https://calendly.com/rateourjob/30min"
+        message: "Emails sent successfully"
       },
       { status: 200 }
     );
