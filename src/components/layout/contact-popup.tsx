@@ -51,12 +51,8 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
       setIsSubmitted(true);
 
       // Open Calendly in new tab and show success message
-      window.open("https://calendly.com/rateourjob/30min", "_blank");
-      
-      // Optional: Close the popup after a delay
-      setTimeout(() => {
-        onClose();
-      }, 2000);
+      // window.open("https://calendly.com/rateourjob/30min", "_blank");
+
     } catch (error) {
       setSubmitStatus({
         type: "error",
@@ -94,19 +90,13 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
 
             {isSubmitted ? (
               <div className="text-center py-12">
-                <h2 className="text-2xl font-bold mb-4">You Need to Book a Free Demo Call</h2>
+                <h2 className="text-2xl font-bold mb-4">Thanks for submitting the free trail access.</h2>
                 <p className="text-lg text-muted-foreground">
-                  We've opened a new tab where you can{" "}
-                  <span className="text-primary">book a free demo call with our team.</span> If you
-                  weren't redirected automatically, please {" "}
-                  <Link
-                    href="https://calendly.com/rateourjob/30min"
+                  You Need to Book a Free Demo Call. Please click here to{" "}
+                  <Link href="https://calendly.com/rateourjob/30min"
                     target="_blank"
                     className="text-primary underline"
-                  >
-                    click here
-                  </Link>
-                  .
+                  >book a free demo call with our team.</Link>
                 </p>
               </div>
             ) : (
@@ -213,11 +203,10 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
 
                   {submitStatus.type && (
                     <div
-                      className={`p-4 rounded-lg ${
-                        submitStatus.type === "success"
+                      className={`p-4 rounded-lg ${submitStatus.type === "success"
                           ? "bg-green-100 text-green-700"
                           : "bg-red-100 text-red-700"
-                      }`}
+                        }`}
                     >
                       {submitStatus.message}
                     </div>
