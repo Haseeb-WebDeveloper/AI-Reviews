@@ -12,8 +12,19 @@ import { PopupProvider } from "@/context/popup-context";
 import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
-  title: "Rate our job",
-  description: "Rate Our Job",
+  title: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
+  description: "Enhance your online presence with RateOurJob's AI-driven tools. Automate customer review requests via SMS and email, respond with AI, and showcase reviews on your Google Business Profile. Start your free trial today!",
+  keywords: "AI review management, automated customer reviews, local business reputation tools, Google review automation, AI response to reviews, increase Google reviews, online reputation management, customer feedback automation, review request software, AI-powered review solutions",
+  openGraph: {
+    title: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
+    description: "Enhance your online presence with RateOurJob's AI-driven tools. Automate customer review requests via SMS and email, respond with AI, and showcase reviews on your Google Business Profile.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
+    description: "Enhance your online presence with RateOurJob's AI-driven tools. Automate customer review requests via SMS and email, respond with AI, and showcase reviews.",
+  }
 };
 
 export default function RootLayout({
@@ -33,16 +44,8 @@ export default function RootLayout({
           <PopupProvider>
             <main>
               <Analytics />
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-                <DotPattern
-                  className={cn(
-                    "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-                  )}
-                />
-              </div>
               <SmoothScrolling>
                 <AnnouncementBar />
-                <Navbar />
                 {children}
                 <Footer />
               </SmoothScrolling>

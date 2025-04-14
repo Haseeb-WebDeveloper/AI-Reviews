@@ -123,22 +123,16 @@ export function Footer() {
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <div className="space-y-2">
               <Link 
-                href="#how-it-works"
+                href="/privacy-policy"
                 className="block text-sm text-background/80 hover:text-primary transition-colors"
               >
-                Who it works
+                Privacy Policy
               </Link>
               <Link 
-                href="#pricing"
+                href="/terms-and-conditions"
                 className="block text-sm text-background/80 hover:text-primary transition-colors"
               >
-                Pricing
-              </Link>
-              <Link 
-                href="#testimonial"
-                className="block text-sm text-background/80 hover:text-primary transition-colors"
-              >
-                Testimonial
+                Terms & Conditions
               </Link>
             </div>
           </div>
