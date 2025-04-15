@@ -1,3 +1,2 @@
-export const local = true;
 
-export const websiteUrl = local ? "http://localhost:3000" : "https://www.rateourjob.com";
+export const websiteUrl = process.env.WEBSITE_URL || "https://www.rateourjob.com";
