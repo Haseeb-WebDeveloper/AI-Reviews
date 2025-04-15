@@ -248,3 +248,11 @@
 .prose .bg-card:hover {
   @apply shadow-md;
 }
+
+section[id] {
+  scroll-margin-top: 120px; /* Adjust based on your header height + some padding */
+}
+
+html {
+  scroll-behavior: smooth;
+}

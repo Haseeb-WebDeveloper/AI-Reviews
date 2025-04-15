@@ -47,6 +47,7 @@ export function WhyItWorks() {
                 }
               ].map((point, index) => (
                 <div
+                  key={point.title}
                   className="flex gap-4"
                 >
                   {/* <div className="flex-shrink-0 size-6 mt-1">

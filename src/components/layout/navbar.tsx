@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { usePopup } from "@/context/popup-context";
+import { websiteUrl } from "@/lib/constant";
 
 export function Navbar() {
   const { openContactForm } = usePopup();
@@ -12,6 +13,26 @@ export function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isAtTop, setIsAtTop] = useState(true);
+
+
+  const menuItems = [
+    {
+      title: "How it works",
+      href: `${websiteUrl}/#how-it-works`
+    },
+    {
+      title: "Pricing",
+      href: `${websiteUrl}/#pricing`
+    },
+    {
+      title: "Testimonials",
+      href: `${websiteUrl}/#testimonials`
+    },
+    {
+      title: "Blog",
+      href: `${websiteUrl}/blog`
+    }
+  ]
   
   useEffect(() => {
     // Set initial scroll position
@@ -114,18 +135,11 @@ export function Navbar() {
           {/* Navigation Items - Center (Desktop) */}
           <div className="hidden md:flex flex-1 items-center justify-center w-full">
             <div className="flex items-center gap-2">
-              <Link href="#how-it-works" className="text-sm py-2 px-4 text-nowrap bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-full">
-                How it works
-              </Link>
-
-              <Link href="#pricing" className="text-sm py-2 px-4 text-nowrap bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-full">
-                Pricing
-              </Link>
-
-              <Link href="#testimonials" className="text-sm py-2 px-4 text-nowrap bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-full">
-                Testimonials
-              </Link>
-
+              {menuItems.map((item, index) => (
+                <Link key={index} href={item.href} className="text-sm py-2 px-4 text-nowrap bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-full">
+                  {item.title}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -143,21 +157,11 @@ export function Navbar() {
           {mobileMenuOpen && (
             <div className="md:hidden fixed top-full bg-white z-50 w-full left-0 right-0 p-4">
               <div className="flex flex-col space-y-2 w-full h-full ">
-                <Link href="#how-it-works" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-3 text-lg font-medium text-center hover:bg-foreground/5 rounded-lg">
-                  How it works
-                </Link>
-                <Link href="#pricing" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-3 text-lg font-medium text-center hover:bg-foreground/5 rounded-lg">
-                  Pricing
-                </Link>
-                <Link href="#testimonials"
-                  onClick={() => setMobileMenuOpen(false)} 
-                  className="p-3 text-lg font-medium text-center hover:bg-foreground/5 rounded-lg">
-                  Testimonials
-                </Link>
+                {menuItems.map((item, index) => (
+                  <Link key={index} href={item.href} className="text-sm py-2 px-4 text-nowrap bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 rounded-full">
+                    {item.title}
+                  </Link>
+                ))}
                 <div className="mt-4 pt-6 border-t">
                   <Button className="w-full text-white rounded-full px-5 py-6 text-base cursor-pointer" onClick={openContactForm}>
                     Get 10 Reviews Free

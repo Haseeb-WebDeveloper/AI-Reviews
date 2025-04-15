@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 // import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import SmoothScrolling from "@/components/Smooth-scrolling";
+import { SmoothScrollProvider } from "@/components/Smooth-scrolling";
 import { Navbar } from "@/components/layout/navbar";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { cn } from "@/lib/utils";
@@ -44,11 +44,12 @@ export default function RootLayout({
           <PopupProvider>
             <main>
               <Analytics />
-              <SmoothScrolling>
+              {/* <SmoothScrollProvider> */}
                 <AnnouncementBar />
+                <Navbar />
                 {children}
                 <Footer />
-              </SmoothScrolling>
+              {/* </SmoothScrollProvider> */}
             </main>
           </PopupProvider>
         </ThemeProvider>

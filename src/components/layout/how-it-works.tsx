@@ -52,7 +52,7 @@ const steps = [
 export function HowItWorks() {
   const { openContactForm } = usePopup();
   return (
-    <section id="how-it-works" className="py-24 relative  bg-foreground/5">
+    <section id="how-it-works" className="py-24 relative bg-foreground/5">
 
       <div className="max-w-[1050px] mx-auto px-4 md:px-0 ">
         {/* Section Header */}
