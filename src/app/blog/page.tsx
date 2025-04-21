@@ -3,14 +3,38 @@ import BlogList from '../../components/blog/blog-list';
 import { sanityClient } from '@/lib/sanity/client';
 import { allPostsQuery, totalPostsQuery } from '@/lib/sanity/queries';
 import BlogSkeleton from '../../components/blog/blog-skeleton';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Blog - Latest News & Updates | RateOurJob',
+  description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.',
+  keywords: ['RateOurJob blog', 'business reviews', 'customer feedback', 'review management', 'local business tips'],
+  openGraph: {
+    title: 'Blog - Latest News & Updates | RateOurJob',
+    description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.',
+    type: 'website',
+    images: [
+      {
+        url: '/blog/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'RateOurJob Blog'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog - Latest News & Updates | RateOurJob',
+    description: 'Stay updated with the latest news, insights, and updates about RateOurJob.',
+    images: ['/blog/og-image.jpg']
+  }
+};
 
 // This function runs at build time
 export async function generateStaticParams() {
   const total = await sanityClient.fetch(totalPostsQuery);
-  // console.log(total);
   const POSTS_PER_PAGE = 10;
   const pages = Math.ceil(total / POSTS_PER_PAGE);
-  // console.log(pages);
   
   return Array.from({ length: pages }, (_, i) => ({
     page: (i + 1).toString(),
@@ -46,10 +70,10 @@ export default async function BlogPage() {
         <div className="absolute inset-0 bg-[url('/blog/pattern.svg')] opacity-20" />
         <div className="relative max-w-4xl mx-auto h-full flex items-center justify-center text-center px-4">
           <div>
-            <h1 className="text-4xl md:text-6xl  font-bold  mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">
               Latest News & Updates
             </h1>
-            <p className="text-xl  max-w-2xl mx-auto">
+            <p className="text-xl max-w-2xl mx-auto">
               Learn about the latest features, updates, and insights from RateOurJob.
             </p>
           </div>
@@ -72,6 +96,7 @@ async function BlogPosts() {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
           <h2 className="text-2xl font-bold">No posts found</h2>
+          <p className="mt-4 text-muted-foreground">Check back later for new content.</p>
         </div>
       </div>
     );

@@ -16,7 +16,6 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     const { name, email, phone, business, website, message } = data;
-    console.log(data);
 
     // Send email to admin
     await transporter.sendMail({
@@ -34,7 +33,6 @@ export async function POST(req: Request) {
       `,
     });
 
-    console.log("Email sent to admin at ", process.env.SMTP_ADMIN);
 
     // Send thank you email to client
     await transporter.sendMail({

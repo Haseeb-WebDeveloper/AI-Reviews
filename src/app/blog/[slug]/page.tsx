@@ -1,58 +1,86 @@
-'use client'
-
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft, Calendar } from 'lucide-react'
-import { motion } from 'framer-motion'
 import { fetchPostBySlug, urlForImage } from '@/lib/sanity/client'
 import type { Post } from '@/lib/sanity/client'
-import { PortableText } from '@portabletext/react'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import BlogPostContent from '@/components/blog/blog-post-content'
 
-export default function BlogPost() {
-  const params = useParams()
-  const slug = params.slug as string
-  const [post, setPost] = useState<Post | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const loadPost = async () => {
-      const postData = await fetchPostBySlug(slug)
-      console.log("postData", postData);
-      setPost(postData)
-      setLoading(false)
-    }
-    loadPost()
-  }, [slug])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background pt-44 md:pt-44 pb-20">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="animate-pulse">
-            <div className="h-8 bg-foreground/10 rounded w-1/2 mb-4"></div>
-            <div className="h-4 bg-foreground/10 rounded w-1/4 mb-8"></div>
-            <div className="aspect-video bg-foreground/10 rounded mb-8"></div>
-            <div className="space-y-4">
-              <div className="h-4 bg-foreground/10 rounded w-full"></div>
-              <div className="h-4 bg-foreground/10 rounded w-full"></div>
-              <div className="h-4 bg-foreground/10 rounded w-3/4"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = await fetchPostBySlug(params.slug)
 
   if (!post) {
-    return (
-      <div className="min-h-screen bg-background pt-44 md:pt-44 pb-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl">Post not found</h1>
-        </div>
-      </div>
-    )
+    return {
+      title: 'Post Not Found | RateOurJob Blog',
+      description: 'The requested blog post could not be found.'
+    }
+  }
+
+  const ogImage = urlForImage(post.imageUrl).url()
+
+  return {
+    title: `${post.seoTitle || post.title} | RateOurJob Blog`,
+    description: post.seoDescription || post.description,
+    keywords: post.keywords,
+    openGraph: {
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.description,
+      type: 'article',
+      publishedTime: post.publishedAt,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.imageAlt || post.title
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.seoTitle || post.title,
+      description: post.seoDescription || post.description,
+      images: [ogImage]
+    },
+    alternates: {
+      canonical: `https://rateourjob.com/blog/${post.slug}`
+    }
+  }
+}
+
+// Generate JSON-LD schema
+function generateJsonLd(post: Post) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.seoTitle || post.title,
+    description: post.seoDescription || post.description,
+    image: urlForImage(post.imageUrl).url(),
+    datePublished: post.publishedAt,
+    author: {
+      '@type': 'Organization',
+      name: 'RateOurJob'
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'RateOurJob',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://rateourjob.com/logo.png'
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://rateourjob.com/blog/${post.slug}`
+    }
+  }
+}
+
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await fetchPostBySlug(params.slug)
+
+  if (!post) {
+    notFound()
   }
 
   return (
@@ -68,47 +96,18 @@ export default function BlogPost() {
             Back to Blog
           </Link>
 
-          {/* Article Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-            <div className="flex items-center gap-4 text-muted-foreground">
-              <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>{new Date(post.publishedAt).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}</span>
-              </div>
-              <div className="bg-white/90 dark:bg-gray-900/90 px-3 py-1 rounded-full">
-                <span className="text-sm font-medium">{post.category}</span>
-              </div>
-            </div>
-          </div>
+          {/* JSON-LD Schema */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(generateJsonLd(post))
+            }}
+          />
 
-          {/* Featured Image */}
-          <div className="relative aspect-video w-full mb-8 rounded-lg overflow-hidden">
-            <Image
-              src={urlForImage(post.imageUrl).url()}
-              alt={post.title}
-              width={500}
-              height={500}
-              priority
-              className="object-cover w-full h-full"
-            />
-          </div>
-
-          {/* Article Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="prose prose-lg dark:prose-invert max-w-none prose-a:underline prose-p:text-foreground/95 prose-p:text-xl prose-p:leading-relaxed "
-          >
-              <PortableText value={post.content} />
-          </motion.div>
+          {/* Blog Post Content */}
+          <BlogPostContent post={post} />
         </div>
       </div>
     </div>
   )
-} 
+}

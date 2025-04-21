@@ -11,6 +11,13 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'seoTitle',
+      title: 'SEO Title',
+      type: 'string',
+      description: 'Title used for SEO (defaults to main title if empty)',
+      validation: (rule) => rule.max(60).warning('Longer titles may be truncated by search engines'),
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {source: 'title'},
@@ -20,6 +27,20 @@ export const postType = defineType({
       name: 'description',
       type: 'string',
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'seoDescription',
+      title: 'SEO Description',
+      type: 'text',
+      description: 'Description used for SEO (defaults to main description if empty)',
+      validation: (rule) => rule.max(160).warning('Longer descriptions may be truncated by search engines'),
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Add keywords that describe the content',
     }),
     defineField({
       name: 'category',
@@ -37,11 +58,42 @@ export const postType = defineType({
     defineField({
       name: 'featuredImage',
       type: 'image',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+          validation: (rule) => rule.required(),
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        }
+      ]
     }),
     defineField({
       name: 'content',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        {
+          type: 'image',
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            }
+          ]
+        }
+      ],
     }),
   ],
 })
