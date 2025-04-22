@@ -16,8 +16,12 @@ export async function generateStaticParams() {
   return slugs.map(slugObj => ({ slug: slugObj.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }, parent: ResolvingMetadata) {
-  const slug = params.slug
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
   const post = await fetchPostBySlug(slug)
 
   if (!post) {
@@ -120,8 +124,12 @@ function generateStructuredData(post: Post) {
   return { blogPostSchema, breadcrumbSchema }
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const slug = params.slug
+export default async function BlogPost({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
   const post = await fetchPostBySlug(slug)
 
   if (!post) {
