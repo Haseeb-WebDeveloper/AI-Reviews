@@ -4,15 +4,17 @@ import { sanityClient } from '@/lib/sanity/client';
 import { allPostsQuery, totalPostsQuery } from '@/lib/sanity/queries';
 import BlogSkeleton from '../../components/blog/blog-skeleton';
 import { Metadata } from 'next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Blog - Latest News & Updates | RateOurJob',
-  description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.',
-  keywords: ['RateOurJob blog', 'business reviews', 'customer feedback', 'review management', 'local business tips'],
+  description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories for review management.',
+  keywords: ['RateOurJob blog', 'business reviews', 'customer feedback', 'review management', 'local business tips', 'online reputation', 'Google Business Profile'],
   openGraph: {
     title: 'Blog - Latest News & Updates | RateOurJob',
     description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.',
     type: 'website',
+    url: 'https://rateourjob.com/blog',
     images: [
       {
         url: '/blog/og-image.jpg',
@@ -27,6 +29,9 @@ export const metadata: Metadata = {
     title: 'Blog - Latest News & Updates | RateOurJob',
     description: 'Stay updated with the latest news, insights, and updates about RateOurJob.',
     images: ['/blog/og-image.jpg']
+  },
+  alternates: {
+    canonical: 'https://rateourjob.com/blog'
   }
 };
 
@@ -63,8 +68,56 @@ async function getInitialPosts() {
 }
 
 export default async function BlogPage() {
+  // Create structured data for BreadcrumbList
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://rateourjob.com"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://rateourjob.com/blog"
+      }
+    ]
+  };
+  
+  // Create structured data for Blog
+  const blogStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "headline": "RateOurJob Blog - Latest News & Updates",
+    "description": "Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.",
+    "url": "https://rateourjob.com/blog",
+    "publisher": {
+      "@type": "Organization",
+      "name": "RateOurJob",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rateourjob.com/logo.png"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <Script
+        id="breadcrumb-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <Script
+        id="blog-structured-data"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogStructuredData) }}
+      />
+      
       {/* Hero Section */}
       <div className="relative pt-24 md:pt-48 pb-16 border-b border-foreground/10">
         <div className="absolute inset-0 bg-[url('/blog/pattern.svg')] opacity-20" />
