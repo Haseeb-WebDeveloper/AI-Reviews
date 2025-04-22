@@ -1,7 +1,7 @@
-import { createClient } from "next-sanity";
+import { createClient, QueryParams } from "next-sanity";
 import imageUrlBuilder from '@sanity/image-url';
 import { groq } from 'next-sanity';
-import { featuredPostsQuery, allPostsQuery, singlePostQuery, totalPostsQuery, imageGalleryQuery } from './queries';
+import { featuredPostsQuery, allPostsQuery, singlePostQuery, totalPostsQuery, imageGalleryQuery, totalPostsSlugsQuery } from './queries';
 
 export const sanityClient = createClient({
   projectId: "9m86wjji",
@@ -91,4 +91,27 @@ export async function fetchImageGallery() {
     console.error("Error fetching image gallery:", error);
     return [];
   }
+}
+
+export async function fetchPostsSlugs(): Promise<string[]> {
+  try {
+    const slugs = await sanityClient.fetch(totalPostsSlugsQuery);
+    return slugs;
+  } catch (error) {
+    console.error("Error fetching posts slugs:", error);
+    return [];
+  }
+}
+
+
+
+export const fetchSanityData = async <T>(
+  query: string,
+  params: QueryParams = {},
+  options: { revalidate?: number } = {}
+): Promise<T> => {
+  return sanityClient.fetch(query, params, {
+   //  cache: 'force-cache',
+    ...options.revalidate && { next: { revalidate: options.revalidate } },
+  })
 }

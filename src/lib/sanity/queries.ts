@@ -55,6 +55,14 @@ export const totalPostsQuery = `
   count(*[_type == "blog" && publishedAt < now()])
 `; 
 
+
+// all published posts slugs
+export const totalPostsSlugsQuery = `
+  *[_type == "blog" && defined(slug.current)][]{
+    "slug": slug.current
+  }
+`; 
+
 export const imageGalleryQuery = `
 *[_type == "imageGallery"]{
   title,
