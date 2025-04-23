@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Instagram, Facebook, Linkedin, MessageCircle, Mail, Phone } from "lucide-react";
+import { Instagram, Facebook, Linkedin, MessageCircle, Mail, Phone, Youtube } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
@@ -149,6 +149,15 @@ export function Footer() {
                 aria-label="Instagram"
               >
                 <Instagram className="size-5" />
+              </Link>
+              <Link 
+                href="https://www.youtube.com/@RateOurJob"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                aria-label="Youtube"
+              >
+                <Youtube className="size-5" />
               </Link>
               <Link 
                 href="https://www.facebook.com/profile.php?id=61574592760873"

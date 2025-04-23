@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-// import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SmoothScrollProvider } from "@/components/Smooth-scrolling";
 import { Navbar } from "@/components/layout/navbar";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
-import { cn } from "@/lib/utils";
-import { DotPattern } from "@/components/magicui/dot-pattern";
 import { Footer } from "@/components/layout/footer";
 import { PopupProvider } from "@/context/popup-context";
 import { Analytics } from "@vercel/analytics/react"
@@ -84,6 +80,18 @@ export default function RootLayout({
       <head>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNBCCMPFJE"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-YNBCCMPFJE');
+            `
+          }}
+        />
       </head>
       <body className="antialiased body">
         <ThemeProvider
