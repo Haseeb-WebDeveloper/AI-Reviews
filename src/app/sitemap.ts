@@ -4,7 +4,7 @@ import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all blog post slugs
-  const postSlugs = await fetchSanityData<{ slug: string }[]>(totalPostsSlugsQuery);
+  const postSlugs = await fetchSanityData<{ slug: string }[]>(totalPostsSlugsQuery, {}, { revalidate: 60 });
   
   // Base URL for the site
   const baseUrl = "https://rateourjob.com";

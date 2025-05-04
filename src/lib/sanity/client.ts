@@ -41,7 +41,7 @@ export interface ImageGallery {
 
 export async function fetchFeaturedPosts(): Promise<Post[]> {
   try {
-    const posts = await sanityClient.fetch(featuredPostsQuery);
+    const posts = await sanityClient.fetch(featuredPostsQuery, {}, { next: { revalidate: 60 } });
     return posts;
   } catch (error) {
     console.error("Error fetching featured posts:", error);
@@ -51,11 +51,7 @@ export async function fetchFeaturedPosts(): Promise<Post[]> {
 
 export async function fetchPosts(start: number = 0, end: number = 10): Promise<Post[]> {
   try {
-    const posts = await sanityClient.fetch(allPostsQuery, { start, end });
-    // console.log("posts", posts);
-    // console.log("start", start);
-    // console.log("end", end);
-    // console.log("allPostsQuery", allPostsQuery);
+    const posts = await sanityClient.fetch(allPostsQuery, { start, end }, { next: { revalidate: 60 } });
     return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -65,7 +61,7 @@ export async function fetchPosts(start: number = 0, end: number = 10): Promise<P
 
 export async function fetchTotalPosts(): Promise<number> {
   try {
-    const total = await sanityClient.fetch(totalPostsQuery);
+    const total = await sanityClient.fetch(totalPostsQuery, {}, { next: { revalidate: 60 } });
     return total;
   } catch (error) {
     console.error("Error fetching total posts:", error);
@@ -75,7 +71,7 @@ export async function fetchTotalPosts(): Promise<number> {
 
 export async function fetchPostBySlug(slug: string): Promise<Post | null | any> {
   try {
-    const post = await sanityClient.fetch(singlePostQuery, { slug });
+    const post = await sanityClient.fetch(singlePostQuery, { slug }, { next: { revalidate: 60 } });
     return post;
   } catch (error) {
     console.error("Error fetching post:", error);
@@ -85,7 +81,7 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null | any> 
 
 export async function fetchImageGallery() {
   try {
-    const imageGallery = await sanityClient.fetch(imageGalleryQuery);
+    const imageGallery = await sanityClient.fetch(imageGalleryQuery, {}, { next: { revalidate: 60 } });
     return imageGallery;
   } catch (error) {
     console.error("Error fetching image gallery:", error);
@@ -95,7 +91,7 @@ export async function fetchImageGallery() {
 
 export async function fetchPostsSlugs(): Promise<string[]> {
   try {
-    const slugs = await sanityClient.fetch(totalPostsSlugsQuery);
+    const slugs = await sanityClient.fetch(totalPostsSlugsQuery, {}, { next: { revalidate: 60 } });
     return slugs;
   } catch (error) {
     console.error("Error fetching posts slugs:", error);
@@ -103,15 +99,12 @@ export async function fetchPostsSlugs(): Promise<string[]> {
   }
 }
 
-
-
 export const fetchSanityData = async <T>(
   query: string,
   params: QueryParams = {},
   options: { revalidate?: number } = {}
 ): Promise<T> => {
   return sanityClient.fetch(query, params, {
-   //  cache: 'force-cache',
     ...options.revalidate && { next: { revalidate: options.revalidate } },
   })
 }
