@@ -24,6 +24,11 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'categories',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'category'}]}],
+    }),
+    defineField({
       name: 'description',
       type: 'string',
       validation: (rule) => rule.required(),
@@ -41,13 +46,6 @@ export const postType = defineType({
       type: 'array',
       of: [{type: 'string'}],
       description: 'Add keywords that describe the content',
-    }),
-    defineField({
-      name: 'category',
-      type: 'string',
-      options: {
-        list: [ 'News', 'Featured', 'Stats', 'Schedules', 'Results', 'Highlights']
-      }
     }),
     defineField({
       name: 'publishedAt',
@@ -94,6 +92,17 @@ export const postType = defineType({
           ]
         }
       ],
+    }),
+    defineField({
+      name: 'relatedPosts',
+      title: 'Related Posts',
+      type: 'array',
+      description: 'Select posts that are related to this one',
+      of: [{
+        type: 'reference',
+        to: [{ type: 'blog' }]
+      }],
+      validation: (rule) => rule.max(3).warning('Maximum of 3 related posts recommended'),
     }),
   ],
 })

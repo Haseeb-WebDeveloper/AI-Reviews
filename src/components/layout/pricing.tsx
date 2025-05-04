@@ -134,7 +134,7 @@ export function Pricing() {
           <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="max-w-[1050px] mx-auto px-4 md:px-0">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-0">
           {/* Section Header */}
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-4xl font-bold">

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import BlogList from '../../components/blog/blog-list';
-import { sanityClient } from '@/lib/sanity/client';
-import { allPostsQuery, totalPostsQuery } from '@/lib/sanity/queries';
+import { sanityClient, fetchCategories } from '@/lib/sanity/client';
+import { allPostsQuery, featuredPostQuery, totalPostsQuery } from '@/lib/sanity/queries';
 import BlogSkeleton from '../../components/blog/blog-skeleton';
 import { Metadata } from 'next';
 import Script from 'next/script';
@@ -49,20 +49,26 @@ export async function generateStaticParams() {
 // This function runs at build time
 async function getInitialPosts() {
   try {
-    const [posts, total] = await Promise.all([
-      sanityClient.fetch(allPostsQuery, { start: 0, end: 10 }),
-      sanityClient.fetch(totalPostsQuery)
+    const [posts, total, featuredPost, categories] = await Promise.all([
+      sanityClient.fetch(allPostsQuery, { start: 0, end: 10 }, {next: { revalidate: 60 }} ),
+      sanityClient.fetch(totalPostsQuery, {}, {next: { revalidate: 60 }} ),
+      sanityClient.fetch(featuredPostQuery, {}, {next: { revalidate: 60 }} ),
+      fetchCategories()
     ]);
     
     return {
       posts,
-      total
+      total,
+      featuredPost,
+      categories
     };
   } catch (error) {
     console.error("Error fetching initial posts:", error);
     return {
       posts: [],
-      total: 0
+      total: 0,
+      featuredPost: null,
+      categories: []
     };
   }
 }
@@ -142,7 +148,7 @@ export default async function BlogPage() {
 
 // Separate async component for posts
 async function BlogPosts() {
-  const { posts, total } = await getInitialPosts();
+  const { posts, total, featuredPost, categories } = await getInitialPosts();
 
   if (posts.length === 0) {
     return (
@@ -155,5 +161,5 @@ async function BlogPosts() {
     );
   }
 
-  return <BlogList initialPosts={posts} totalPosts={total} />;
+  return <BlogList initialPosts={posts} totalPosts={total} featuredPost={featuredPost} categories={categories} />;
 } 

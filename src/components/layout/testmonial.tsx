@@ -61,7 +61,7 @@ export function Testmonial() {
 
     return (
         <section id="testimonials" className="py-20 bg-foreground/5 overflow-hidden">
-            <div className="max-w-[1050px] overflow-hidden mx-auto px-4 md:px-0 space-y-12">
+            <div className="max-w-[1200px] overflow-hidden mx-auto px-4 md:px-0 space-y-12">
                 <div>
                     <h2 className="text-5xl w-full text-center sm:text-6xl lg:text-7xl font-bold tracking-tight">
                         Testimonials

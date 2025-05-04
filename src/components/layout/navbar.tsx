@@ -99,7 +99,7 @@ export function Navbar() {
 
   return (
     <header className={navbarContainerStyles}>
-      <div className="max-w-[1050px] mx-auto px-4 md:px-0 w-full py-4">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-0 w-full py-4">
         <div className="flex items-center justify-between px-3 py-2.5 gap-6 rounded-full border border-border bg-white relative shadow-sm">
           {/* Logo - Left */}
           <div className="flex items-center justify-start pl-1 md:pl-3">

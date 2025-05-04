@@ -1,7 +1,7 @@
 import { createClient, QueryParams } from "next-sanity";
 import imageUrlBuilder from '@sanity/image-url';
 import { groq } from 'next-sanity';
-import { featuredPostsQuery, allPostsQuery, singlePostQuery, totalPostsQuery, imageGalleryQuery, totalPostsSlugsQuery } from './queries';
+import { allPostsQuery, singlePostQuery, totalPostsQuery, imageGalleryQuery, totalPostsSlugsQuery, allCategoriesQuery } from './queries';
 
 export const sanityClient = createClient({
   projectId: "9m86wjji",
@@ -29,25 +29,32 @@ export type Post = {
   imageUrl: string;
   imageAlt?: string;
   imageCaption?: string;
-  category: string;
+  categories?: any[];
+  articleSection?: string;
   content: any[];
+  relatedPosts?: {
+    _id: string;
+    title: string;
+    slug: string;
+    description: string;
+    publishedAt: string;
+    imageUrl: string;
+    imageAlt?: string;
+  }[];
 };
 
 export interface ImageGallery {
   _id: string;
   title: string;
-  categories: any[];
+  categories?: any[];
 }
 
-export async function fetchFeaturedPosts(): Promise<Post[]> {
-  try {
-    const posts = await sanityClient.fetch(featuredPostsQuery, {}, { next: { revalidate: 60 } });
-    return posts;
-  } catch (error) {
-    console.error("Error fetching featured posts:", error);
-    return [];
-  }
-}
+export type Category = {
+  _id: string;
+  title?: string;
+  name?: string;
+  image?: string;
+};
 
 export async function fetchPosts(start: number = 0, end: number = 10): Promise<Post[]> {
   try {
@@ -107,4 +114,14 @@ export const fetchSanityData = async <T>(
   return sanityClient.fetch(query, params, {
     ...options.revalidate && { next: { revalidate: options.revalidate } },
   })
+}
+
+export async function fetchCategories(): Promise<Category[]> {
+  try {
+    const categories = await sanityClient.fetch(allCategoriesQuery, {}, { next: { revalidate: 60 } });
+    return categories;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
 }

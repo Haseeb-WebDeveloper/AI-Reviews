@@ -66,9 +66,9 @@ export default function PostCard({ post }: { post: Post }) {
               <time dateTime={post.publishedAt} className="text-sm text-foreground/80">
                 {publishDate}
               </time>
-              {post.category && (
+              {post.categories && (
                 <span className="text-sm font-medium bg-foreground/10 px-3 py-1 rounded-full">
-                  {post.category}
+                  {post.categories[0].title}
                 </span>
               )}
             </div>

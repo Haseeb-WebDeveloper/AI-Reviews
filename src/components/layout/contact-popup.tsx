@@ -102,7 +102,7 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
             ) : (
               <>
                 {/* Form Header */}
-                <div className="mb-8 text-center">
+                <div className="mb-6 text-center">
                   <h2 className="text-2xl font-bold mb-2">Get Started Free</h2>
                   <p className="text-muted-foreground">
                     Get Your First 10 Reviews Totally Free
@@ -110,7 +110,7 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Name and Email Row */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
@@ -195,17 +195,32 @@ export function ContactPopup({ isOpen, onClose }: ContactPopupProps) {
                     <textarea
                       id="message"
                       name="message"
-                      rows={3}
+                      rows={2}
                       className="w-full px-4 py-2 rounded-lg border bg-background focus:ring-2 focus:ring-primary/50 outline-none transition-all resize-none"
                       placeholder="Any additional information..."
                     />
                   </div>
 
+                  <div className="flex items-start gap-2 mt-2">
+                    <input
+                      type="checkbox"
+                      id="smsConsent"
+                      required
+                      className="mt-1"
+                    />
+                    <label htmlFor="smsConsent" className="text-xs text-muted-foreground">
+                      You agree to receive transactional messages. Terms and privacy policy can be found at{' '}
+                      <a href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and{' '}
+                      <a href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.
+                      You may receive up to 5 messages/mon. Text and data rates may apply. Reply STOP or HELP for help.
+                    </label>
+                  </div>
+
                   {submitStatus.type && (
                     <div
                       className={`p-4 rounded-lg ${submitStatus.type === "success"
-                          ? "bg-green-100 text-green-700"
-                          : "bg-red-100 text-red-700"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
                         }`}
                     >
                       {submitStatus.message}

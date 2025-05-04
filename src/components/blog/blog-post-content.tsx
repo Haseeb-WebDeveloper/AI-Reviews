@@ -25,7 +25,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
             <time dateTime={post.publishedAt}>{publishDate}</time>
           </div>
           <div className="bg-white/90 dark:bg-gray-900/90 px-3 py-1 rounded-full">
-            <span className="text-sm font-medium">{post.category}</span>
+            <span className="text-sm font-medium">{post.categories?.[0]?.title || ''}</span>
           </div>
         </div>
       </div>

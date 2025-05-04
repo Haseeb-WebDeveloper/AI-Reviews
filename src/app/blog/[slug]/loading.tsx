@@ -1,7 +1,7 @@
 export default function BlogPostLoading() {
   return (
     <div className="min-h-screen bg-background pt-44 md:pt-44 pb-20">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-[1200px] mx-auto px-4">
         <div className="animate-pulse">
           <div className="h-8 bg-foreground/10 rounded w-1/2 mb-4"></div>
           <div className="h-4 bg-foreground/10 rounded w-1/4 mb-8"></div>

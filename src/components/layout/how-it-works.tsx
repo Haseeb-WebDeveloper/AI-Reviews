@@ -54,7 +54,7 @@ export function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 relative bg-foreground/5">
 
-      <div className="max-w-[1050px] mx-auto px-4 md:px-0 ">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-0 ">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
           <motion.h2
@@ -77,7 +77,7 @@ export function HowItWorks() {
         </div>
 
         {/* Steps Carousel */}
-        <div className="relative">
+        <div className="relative max-w-[1200px] mx-auto px-4 md:px-16">
           <Carousel
             opts={{
               align: "start",

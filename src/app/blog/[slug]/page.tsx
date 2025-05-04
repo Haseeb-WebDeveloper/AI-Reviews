@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import BlogPostContent from '@/components/blog/blog-post-content'
+import BlogSidebar from '@/components/blog/blog-sidebar'
 import { totalPostsSlugsQuery } from '@/lib/sanity/queries'
 import Script from 'next/script'
 
@@ -92,7 +93,7 @@ function generateStructuredData(post: Post) {
       '@id': `https://rateourjob.com/blog/${post.slug}`
     },
     'keywords': post.keywords?.join(', '),
-    'articleSection': post.category
+    'articleSection': 'Blog'
   }
 
   // Create BreadcrumbList schema
@@ -139,7 +140,7 @@ export default async function BlogPost({
   const { blogPostSchema, breadcrumbSchema } = generateStructuredData(post)
 
   return (
-    <div className="min-h-screen bg-background pt-44 md:pt-44 pb-20 border-b border-foreground/10">
+    <div className="min-h-screen bg-background pt-44 md:pt-44 pb-20 border-b border-foreground/10 ">
       <Script
         id="blog-post-schema"
         type="application/ld+json"
@@ -151,8 +152,8 @@ export default async function BlogPost({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       
-      <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto">
+      <div className="mx-auto px-4">
+        <div className="max-w-[1200px] mx-auto">
           {/* Visible Breadcrumbs for UX */}
           <nav className="text-sm mb-4">
             <ol className="flex flex-wrap items-center text-muted-foreground">
@@ -179,8 +180,17 @@ export default async function BlogPost({
             Back to Blog
           </Link>
 
-          {/* Blog Post Content */}
-          <BlogPostContent post={post} />
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Main Content */}
+            <div className="flex-1">
+              <BlogPostContent post={post} />
+            </div>
+
+            {/* Sidebar */}
+            <div className="lg:w-[300px] space-y-8">
+              <BlogSidebar post={post} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,13 @@
-export const featuredPostsQuery = `
-  *[_type == "blog" && category == "Featured"] | order(publishedAt desc)[0...4] {
+export const allCategoriesQuery = `
+  *[_type == "category"] {
+    _id,
+    name,
+    "image": image.asset._ref
+  }
+`;
+
+export const featuredPostQuery = `
+  *[_type == "blog" && category == "Featured"][0] {
     _id,
     title,
     seoTitle,
@@ -11,7 +19,10 @@ export const featuredPostsQuery = `
     "imageUrl": featuredImage.asset._ref,
     "imageAlt": featuredImage.alt,
     "imageCaption": featuredImage.caption,
-    category
+    categories[]-> {
+      title,
+      image
+    }
   }
 `;
 
@@ -28,7 +39,10 @@ export const allPostsQuery = `
     "imageUrl": featuredImage.asset._ref,
     "imageAlt": featuredImage.alt,
     "imageCaption": featuredImage.caption,
-    category
+    categories[]-> {
+      title,
+      image
+    }
   }
 `;
 
@@ -45,8 +59,20 @@ export const singlePostQuery = `
     "imageUrl": featuredImage.asset._ref,
     "imageAlt": featuredImage.alt,
     "imageCaption": featuredImage.caption,
-    category,
-    content
+    categories[]-> {
+      title,
+      image
+    },
+    content,
+    "relatedPosts": relatedPosts[]-> {
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      publishedAt,
+      "imageUrl": featuredImage.asset._ref,
+      "imageAlt": featuredImage.alt
+    }
   }
 `;
 

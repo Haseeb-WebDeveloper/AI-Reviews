@@ -6,6 +6,7 @@ import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { Footer } from "@/components/layout/footer";
 import { PopupProvider } from "@/context/popup-context";
 import { Analytics } from "@vercel/analytics/react"
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rateourjob.com'),
@@ -111,6 +112,7 @@ export default function RootLayout({
               {/* </SmoothScrollProvider> */}
             </main>
           </PopupProvider>
+          <Toaster position="bottom-right" expand={true} richColors />
         </ThemeProvider>
       </body>
     </html>

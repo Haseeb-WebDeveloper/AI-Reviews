@@ -7,7 +7,7 @@ export function WhyItWorks() {
   
   return (
     <section className="py-20 md:py-32 overflow-hidden ">
-      <div className="max-w-[1050px] mx-auto px-4 md:px-0">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-0">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 ">
           {/* Left Column - Content */}
           <div className="space-y-8">

@@ -42,7 +42,7 @@ export function AnnouncementBar() {
           exit={{ height: 0, opacity: 0 }}
           className="fixed top-0 left-0 right-0 bg-secondary text-background z-50"
         >
-          <div className="max-w-[1050px] mx-auto px-4 md:px-0">
+          <div className="max-w-[1200px] mx-auto px-4 md:px-0">
             <div className="flex items-center justify-center py-2 text-sm md:text-base">
               <div
                 className="flex items-center gap-x-2 group"
