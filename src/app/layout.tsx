@@ -104,12 +104,10 @@ export default function RootLayout({
           <PopupProvider>
             <main>
               <Analytics />
-              {/* <SmoothScrollProvider> */}
                 <AnnouncementBar />
                 <Navbar />
                 {children}
                 <Footer />
-              {/* </SmoothScrollProvider> */}
             </main>
           </PopupProvider>
           <Toaster position="bottom-right" expand={true} richColors />
