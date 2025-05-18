@@ -11,14 +11,14 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
   metadataBase: new URL('https://rateourjob.com'),
   title: {
-    default: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
-    template: "%s | RateOurJob"
+    default: "Grow your business with automated review requests",
+    template: "%s | Rateourjob"
   },
-  description: "Automate customer review requests, respond with AI, and showcase reviews on your Google Business Profile. Start your free trial today!",
-  keywords: ["AI review management", "automated customer reviews", "local business reputation tools", "Google review automation", "AI response to reviews", "increase Google reviews", "online reputation management", "customer feedback automation", "review request software", "AI-powered review solutions"],
-  authors: [{ name: "RateOurJob Team" }],
-  creator: "RateOurJob",
-  publisher: "RateOurJob",
+  description: "Boost your local reputation with Rate Our Job — the smart platform that helps local businesses automatically collect and manage customer reviews across Google, Facebook, and more.",
+  keywords: ["AI review management", "google my business", "gmb", "automated customer reviews", "local business reputation tools", "Google review automation", "AI response to reviews", "increase Google reviews", "online reputation management", "customer feedback automation", "review request software", "AI-powered review solutions"],
+  authors: [{ name: "Wasif Ali Khan" }],
+  creator: "Wasif Ali Khan",
+  publisher: "Wasif Ali Khan",
   formatDetection: {
     email: false,
     address: false,
@@ -39,24 +39,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://rateourjob.com",
-    siteName: "RateOurJob",
-    title: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
-    description: "Automate customer review requests, respond with AI, and showcase reviews on your Google Business Profile. Start your free trial today!",
+    siteName: "Rateourjob",
+    title: "Rateourjob: Grow your business with automated review requests",
+    description: "Boost your local reputation with Rate Our Job — the smart platform that helps local businesses automatically collect and manage customer reviews across Google, Facebook, and more.",
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/logo.png',
         width: 1200,
         height: 630,
-        alt: 'RateOurJob - AI-Powered Review Management',
+        alt: 'Rateourjob - Grow your business with automated review requests',
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Boost Your Local Business with AI-Powered Review Management | RateOurJob",
-    description: "Automate customer review requests, respond with AI, and showcase reviews on your Google Business Profile. Start your free trial today!",
-    images: ['/images/og-image.jpg'],
-    creator: "@RateOurJob",
+    title: "Rateourjob: Grow your business with automated review requests",
+    description: "Boost your local reputation with Rate Our Job — the smart platform that helps local businesses automatically collect and manage customer reviews across Google, Facebook, and more.",
+    images: ['/images/logo.png'],
+    creator: "@Rateourjob",
   },
   verification: {
     google: "your-google-site-verification-code",
@@ -81,6 +81,53 @@ export default function RootLayout({
       <head>
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {/* Schema.org JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              "name": "Rateourjob",
+              "applicationCategory": "BusinessApplication",
+              "description": "Boost your local reputation with Rate Our Job — the smart platform that helps local businesses automatically collect and manage customer reviews across Google, Facebook, and more.",
+              "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "ratingCount": "100"
+              },
+              "operatingSystem": "Web-based",
+              "url": "https://rateourjob.com",
+              "sameAs": [
+                "https://twitter.com/Rateourjob"
+              ]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Rateourjob",
+              "url": "https://rateourjob.com",
+              "logo": "https://rateourjob.com/images/logo.png",
+              "description": "Boost your local reputation with Rate Our Job — the smart platform that helps local businesses automatically collect and manage customer reviews across Google, Facebook, and more.",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer service",
+                "url": "https://rateourjob.com/contact"
+              }
+            })
+          }}
+        />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-YNBCCMPFJE"></script>
         <script

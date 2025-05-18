@@ -7,12 +7,12 @@ import { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Blog - Latest News & Updates | RateOurJob',
-  description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories for review management.',
+  title: 'Rateourjob: Blogs',
+  description: 'Discover expert tips on review automation, local SEO, and Google My Business. The Rate Our Job Blog helps local business owners to grow their business.',
   keywords: ['RateOurJob blog', 'business reviews', 'customer feedback', 'review management', 'local business tips', 'online reputation', 'Google Business Profile'],
   openGraph: {
-    title: 'Blog - Latest News & Updates | RateOurJob',
-    description: 'Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.',
+    title: 'Rateourjob: Blogs',
+    description: 'Discover expert tips on review automation, local SEO, and Google My Business. The Rate Our Job Blog helps local business owners to grow their business.',
     type: 'website',
     url: 'https://rateourjob.com/blog',
     images: [
@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blog - Latest News & Updates | RateOurJob',
-    description: 'Stay updated with the latest news, insights, and updates about RateOurJob.',
+    title: 'Rateourjob: Blogs',
+    description: 'Discover expert tips on review automation, local SEO, and Google My Business. The Rate Our Job Blog helps local business owners to grow their business.',
     images: ['/blog/og-image.jpg']
   },
   alternates: {
@@ -98,8 +98,8 @@ export default async function BlogPage() {
   const blogStructuredData = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "headline": "RateOurJob Blog - Latest News & Updates",
-    "description": "Stay updated with the latest news, insights, and updates about RateOurJob. Learn about new features, best practices, and success stories.",
+    "headline": "Rateourjob Blog - Latest News & Updates",
+    "description": "Discover expert tips on review automation, local SEO, and Google My Business. The Rate Our Job Blog helps local business owners to grow their business.",
     "url": "https://rateourjob.com/blog",
     "publisher": {
       "@type": "Organization",
